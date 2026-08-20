@@ -1,0 +1,371 @@
+:root {
+  --bg:#0b0d12; --surface:#121722; --surface2:#171e2b; --text:#f4f6fb;
+  --muted:#9da9bb; --line:#273142; --accent:#64d1c1; --accent2:#9bc4ff;
+  --danger:#ff7676; --max:1160px; color-scheme:dark;
+}
+*{box-sizing:border-box} html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(circle at 15% -5%,rgba(100,209,193,.12),transparent 32rem),var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.65}
+a{color:inherit;text-decoration:none} img{max-width:100%;display:block} button,input,textarea{font:inherit} button{cursor:pointer} code{background:#1c2330;padding:.15rem .35rem;border-radius:6px}
+.container{width:min(var(--max),calc(100% - 40px));margin:0 auto}.hidden{display:none!important}
+.site-header{position:sticky;top:0;z-index:20;background:rgba(11,13,18,.84);backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,.06)}
+.nav-wrap{min-height:68px;display:flex;align-items:center;justify-content:space-between;gap:24px}.brand{font-weight:760;letter-spacing:-.02em}.nav-links{display:flex;gap:20px;align-items:center;font-size:.94rem;color:#c4ccda}.nav-links a:hover{color:#fff}.admin-link{border:1px solid var(--line);padding:7px 12px;border-radius:999px}
+.hero{padding:96px 0 72px}.hero-grid{display:grid;grid-template-columns:1.35fr .75fr;gap:56px;align-items:center}.eyebrow{color:var(--accent);font-size:.78rem;letter-spacing:.16em;font-weight:800;text-transform:uppercase;margin-bottom:10px}
+.hero h1,.page-title,.article-title{font-size:clamp(2.5rem,7vw,5.3rem);line-height:.98;margin:0;letter-spacing:-.055em}.hero-copy{color:#bcc5d3;font-size:1.18rem;max-width:760px;margin:28px 0 0}
+.button-row{display:flex;gap:12px;margin-top:32px;flex-wrap:wrap}.button{appearance:none;border:1px solid transparent;border-radius:12px;padding:11px 16px;display:inline-flex;align-items:center;justify-content:center;font-weight:720;background:transparent;color:var(--text)}.button.primary{background:var(--accent);color:#07110f}.button.secondary{border-color:var(--line);background:#121722}.button.danger{border-color:rgba(255,118,118,.35);color:var(--danger)}
+.hero-panel{border:1px solid var(--line);border-radius:24px;padding:28px;background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.012));box-shadow:0 30px 80px rgba(0,0,0,.25)}.panel-kicker{color:var(--muted);font-size:.9rem}.skill-cloud{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}.skill-cloud span{border:1px solid var(--line);border-radius:999px;padding:9px 13px;background:#0f131b}
+.section{padding:72px 0}.section.alt{background:rgba(255,255,255,.018);border-block:1px solid rgba(255,255,255,.05)}.section-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:28px}.section-head h2{margin:0;font-size:clamp(1.8rem,4vw,2.7rem);letter-spacing:-.035em}.text-link{color:var(--accent2)}
+.card-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card{border:1px solid var(--line);border-radius:18px;padding:24px;background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.012));min-height:250px;transition:transform .2s,border-color .2s;text-align:left;color:inherit;width:100%}.card:hover{transform:translateY(-4px);border-color:#44516a}.card h3{font-size:1.25rem;line-height:1.25;margin:18px 0 8px}.card p{color:var(--muted)}.card-image{width:100%;aspect-ratio:16/8;object-fit:cover;border-radius:12px;margin-bottom:18px}.pill{font-size:.75rem;color:var(--accent);border:1px solid #2e5a56;padding:5px 9px;border-radius:999px;display:inline-flex}
+.article-wrap{max-width:860px}.markdown{margin-top:32px}.markdown h1,.markdown h2,.markdown h3,.preview-box h1,.preview-box h2,.preview-box h3{letter-spacing:-.025em;line-height:1.2;margin-top:2em}.markdown h1{font-size:2.2rem}.markdown h2{font-size:1.55rem;border-bottom:1px solid var(--line);padding-bottom:.45rem}.markdown p,.markdown li,.preview-box p,.preview-box li{color:#c9d1dc}.markdown a,.preview-box a{color:var(--accent2);text-decoration:underline}.markdown img,.preview-box img{border-radius:14px;border:1px solid var(--line);margin:24px 0}.markdown blockquote{margin:1.5rem 0;padding:.6rem 1.2rem;border-left:3px solid var(--accent);background:#10151f;color:#bfc8d5}.markdown pre{overflow:auto;background:#090b0f;padding:16px;border-radius:12px;border:1px solid var(--line)}
+.project-stack{display:grid;gap:26px}.project-card{display:grid;grid-template-columns:.55fr 1fr;gap:32px;border:1px solid var(--line);border-radius:20px;padding:28px;background:var(--surface);scroll-margin-top:90px}.project-card h2{margin-top:0;font-size:2rem}.project-image{border-radius:14px;width:100%;min-height:220px;object-fit:cover}.project-placeholder{display:grid;place-items:center;background:#0e1219;color:#6f7a8b;letter-spacing:.2em;font-size:.8rem}.muted{color:var(--muted)}
+.cert-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}.cert-card{border:1px solid var(--line);background:var(--surface);border-radius:18px;overflow:hidden}.cert-image-wrap{aspect-ratio:16/10;background:#0e1219;display:grid;place-items:center;border-bottom:1px solid var(--line)}.cert-image-wrap img{width:100%;height:100%;object-fit:contain}.cert-placeholder{color:#6f7a8b;letter-spacing:.2em;font-size:.8rem}.cert-body{padding:22px}.cert-body h2{margin:0 0 6px;font-size:1.15rem}.cert-body p{margin:4px 0}
+.loading,.empty-state{color:var(--muted);padding:20px 0}
+.article-overlay{position:fixed;inset:68px 0 0;z-index:15;background:var(--bg);overflow:auto;padding:46px 0 90px}.article-detail-wrap{padding-bottom:60px}.article-title{margin-top:24px}.article-summary{color:var(--muted);font-size:1.12rem}.article-cover{margin:32px 0;width:100%;border-radius:18px;border:1px solid var(--line)}body.article-open{overflow:hidden}
+.site-footer{border-top:1px solid var(--line);color:var(--muted);font-size:.88rem}.site-footer .container{padding:28px 0;display:flex;justify-content:space-between;gap:16px}
+
+/* Admin */
+.page-top{padding-top:72px;min-height:78vh}.admin-shell{max-width:1320px}.admin-top{display:flex;justify-content:space-between;gap:20px;align-items:center}
+.login-card,.editor-card{border:1px solid var(--line);border-radius:20px;background:var(--surface);padding:26px}.login-card{max-width:480px;margin:20px auto}.form-stack{display:grid;gap:16px;margin-top:24px}
+label{display:grid;gap:7px;color:#cbd3df;font-size:.9rem}input,textarea{width:100%;color:var(--text);background:#0d1118;border:1px solid #303b4d;border-radius:10px;padding:10px 12px;outline:none}input:focus,textarea:focus{border-color:#5d7b8c;box-shadow:0 0 0 3px rgba(100,209,193,.08)}textarea{resize:vertical}
+.notice{margin:16px 0;padding:12px 14px;border:1px solid #3a475c;background:#121925;border-radius:10px;color:#d8e1ee}.admin-tabs{display:flex;gap:8px;margin:24px 0;flex-wrap:wrap}.admin-tabs button{border:1px solid var(--line);background:#10151d;color:#b8c1cf;border-radius:999px;padding:8px 13px}.admin-tabs button.active{background:var(--accent);color:#07110f;border-color:transparent}
+.admin-grid{display:grid;grid-template-columns:280px minmax(0,1fr);gap:18px}.admin-list{display:grid;align-content:start;gap:8px}.admin-list>button,.admin-item{width:100%;text-align:left;border:1px solid var(--line);background:#10151d;color:var(--text);border-radius:12px;padding:12px;margin-bottom:8px}.admin-item strong,.admin-item span{display:block}.admin-item span{color:var(--muted);font-size:.78rem;margin-top:4px}.list-new{color:var(--accent)!important}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}.form-grid .full{grid-column:1/-1}.content-editor{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:.9rem;line-height:1.6}.check{display:flex;align-items:center;gap:8px}.check input{width:auto}.upload-row{display:flex;gap:8px}.upload-row input{flex:1}.file-button{position:relative;overflow:hidden;min-width:94px}.file-button input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer}.upload-inline{display:flex;align-items:center;gap:12px;color:var(--muted)}.editor-actions{display:flex;gap:10px;margin-top:20px}.preview-box{margin-top:28px;padding-top:24px;border-top:1px solid var(--line)}.admin-cert-preview{max-height:360px;object-fit:contain;border:1px solid var(--line);border-radius:12px}.resume-editor{max-width:980px}
+@media(max-width:900px){.hero-grid,.project-card,.admin-grid{grid-template-columns:1fr}.card-grid{grid-template-columns:1fr 1fr}.hero{padding-top:64px}}
+@media(max-width:650px){.nav-wrap{align-items:flex-start;padding:16px 0}.nav-links{gap:10px;flex-wrap:wrap;justify-content:flex-end;font-size:.82rem}.card-grid,.cert-grid,.form-grid{grid-template-columns:1fr}.form-grid .full{grid-column:auto}.section-head,.site-footer .container{align-items:flex-start;flex-direction:column}.upload-row{flex-direction:column}.hero h1{font-size:3rem}}
+
+/* Resume / 自傳照片尺寸 */
+#resume-content img,
+#resume-preview img {
+  width: 160px;
+  height: auto;
+  float: right;
+  margin: 0 0 20px 28px;
+  border-radius: 12px;
+}
+
+.hero h1 {
+  font-size: clamp(40px, 5vw, 72px);
+  line-height: 1.08;
+  max-width: 1000px;
+}
+
+/* =========================================================
+   HR Resume Download / Header
+   ========================================================= */
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+
+/* 履歷下拉選單 */
+.resume-dropdown {
+  position: relative;
+}
+
+
+/* 移除 details 預設三角形 */
+.resume-dropdown summary {
+  list-style: none;
+}
+
+.resume-dropdown summary::-webkit-details-marker {
+  display: none;
+}
+
+
+/* Header 下載履歷按鈕 */
+.resume-dropdown > summary {
+  min-height: 42px;
+  padding: 8px 15px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+
+  color: var(--text);
+  background: var(--surface);
+
+  border: 1px solid var(--line);
+  border-radius: 11px;
+
+  font-size: .92rem;
+  font-weight: 720;
+
+  cursor: pointer;
+
+  transition:
+    background .2s,
+    border-color .2s,
+    transform .2s;
+}
+
+
+.resume-dropdown > summary:hover {
+  background: var(--surface2);
+  border-color: var(--accent);
+}
+
+
+.resume-dropdown[open] > summary {
+  border-color: var(--accent);
+  background: rgba(100, 209, 193, .08);
+}
+
+
+/* 下載 icon */
+.download-icon {
+  color: var(--accent);
+  font-size: 1.1rem;
+}
+
+
+/* 下拉箭頭 */
+.dropdown-arrow {
+  color: var(--muted);
+  transition: transform .2s ease;
+}
+
+
+.resume-dropdown[open] .dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+
+/* =========================================================
+   Resume Dropdown Menu
+   ========================================================= */
+
+.resume-dropdown-menu {
+  position: absolute;
+
+  top: calc(100% + 10px);
+  right: 0;
+
+  width: 300px;
+
+  padding: 8px;
+
+  background: rgba(18, 23, 34, .98);
+
+  border: 1px solid var(--line);
+  border-radius: 14px;
+
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, .45);
+
+  backdrop-filter: blur(18px);
+
+  z-index: 100;
+}
+
+
+/* 中文 / 英文履歷選項 */
+.resume-dropdown-menu a {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  gap: 13px;
+
+  padding: 13px;
+
+  border-radius: 10px;
+
+  transition: background .2s;
+}
+
+
+.resume-dropdown-menu a:hover {
+  background: var(--surface2);
+}
+
+
+.resume-dropdown-menu strong {
+  display: block;
+
+  color: var(--text);
+
+  font-size: .93rem;
+  line-height: 1.3;
+}
+
+
+.resume-dropdown-menu small {
+  display: block;
+
+  margin-top: 4px;
+
+  color: var(--muted);
+
+  font-size: .74rem;
+  line-height: 1.3;
+}
+
+
+/* PDF Icon */
+.pdf-icon {
+  width: 40px;
+  height: 40px;
+
+  flex-shrink: 0;
+
+  display: grid;
+  place-items: center;
+
+  color: #ff8f8f;
+
+  background: rgba(255, 118, 118, .1);
+
+  border: 1px solid rgba(255, 118, 118, .25);
+  border-radius: 9px;
+
+  font-size: .67rem;
+  font-weight: 850;
+}
+
+
+/* =========================================================
+   Resume Section Download Buttons
+   ========================================================= */
+
+.resume-section-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  flex-wrap: wrap;
+}
+
+
+.resume-section-actions .button {
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   Button Hover
+   ========================================================= */
+
+.button {
+  transition:
+    transform .18s ease,
+    background .18s ease,
+    border-color .18s ease;
+}
+
+
+.button:hover {
+  transform: translateY(-2px);
+}
+
+
+.button.primary:hover {
+  background: #79dfd0;
+}
+
+
+.button.secondary:hover {
+  border-color: #44516a;
+  background: var(--surface2);
+}
+
+
+/* =========================================================
+   HR 首頁按鈕稍微加大
+   ========================================================= */
+
+.hero .button-row .button {
+  min-height: 48px;
+  padding-left: 18px;
+  padding-right: 18px;
+}
+
+
+/* =========================================================
+   Resume Section
+   ========================================================= */
+
+#resume {
+  scroll-margin-top: 68px;
+}
+
+
+#projects,
+#articles,
+#certifications {
+  scroll-margin-top: 68px;
+}
+
+
+/* =========================================================
+   Mobile
+   ========================================================= */
+
+@media (max-width: 650px) {
+
+  .nav-wrap {
+    min-height: 62px;
+    padding: 10px 0;
+    align-items: center;
+  }
+
+
+  .brand {
+    font-size: .92rem;
+  }
+
+
+  .resume-dropdown > summary {
+    min-height: 40px;
+    padding: 7px 11px;
+    font-size: .82rem;
+  }
+
+
+  .resume-dropdown-menu {
+    position: fixed;
+
+    top: 70px;
+    left: 20px;
+    right: 20px;
+
+    width: auto;
+  }
+
+
+  .resume-section-actions {
+    width: 100%;
+  }
+
+
+  .resume-section-actions .button {
+    width: 100%;
+  }
+
+
+  .hero .button-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    width: 100%;
+  }
+
+
+  .hero .button-row .button {
+    width: 100%;
+  }
+
+}
+
+
+/* 超小螢幕 */
+@media (max-width: 420px) {
+
+  .hero .button-row {
+    grid-template-columns: 1fr;
+  }
+
+}
