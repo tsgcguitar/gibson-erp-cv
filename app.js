@@ -155,7 +155,9 @@ Sales Order → Delivery → PGI → Customer Billing → Intercompany Billing
         continue;
       }
       el.classList.remove('hidden');
-      el.textContent = btn.label;
+      el.innerHTML = btn.primary
+        ? `<span>${escapeHtml(btn.label)}</span><span class="button-arrow">↗</span>`
+        : escapeHtml(btn.label);
       el.href = btn.href || '#';
       el.classList.toggle('primary', !!btn.primary);
       el.classList.toggle('secondary', !btn.primary);
@@ -363,6 +365,1330 @@ Sales Order → Delivery → PGI → Customer Billing → Intercompany Billing
 
   document.getElementById('close-article').addEventListener('click', closeArticle);
 
+
+  /* =========================================================
+     CYBER HERO + LEGENDARY WHALE
+  ========================================================= */
+
+  let cyberHeroInitialized = false;
+
+  function initCyberHero() {
+    if (cyberHeroInitialized) return;
+
+    const hero = document.querySelector('.cyber-hero');
+    if (!hero) return;
+
+    cyberHeroInitialized = true;
+
+    const reducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches;
+
+    const clamp = (value, min, max) =>
+      Math.max(min, Math.min(max, value));
+
+
+    /* =====================================================
+       1. Mouse / pointer light
+    ===================================================== */
+
+    const resetPointerGlow = () => {
+      hero.style.setProperty('--mx', '50%');
+      hero.style.setProperty('--my', '50%');
+    };
+
+
+    hero.addEventListener('pointermove', event => {
+      const rect = hero.getBoundingClientRect();
+
+      if (!rect.width || !rect.height) return;
+
+      const x =
+        ((event.clientX - rect.left) / rect.width) * 100;
+
+      const y =
+        ((event.clientY - rect.top) / rect.height) * 100;
+
+      hero.style.setProperty(
+        '--mx',
+        `${clamp(x, 0, 100)}%`
+      );
+
+      hero.style.setProperty(
+        '--my',
+        `${clamp(y, 0, 100)}%`
+      );
+    });
+
+
+    hero.addEventListener(
+      'pointerleave',
+      resetPointerGlow
+    );
+
+
+    /* =====================================================
+       2. Ambient particles
+    ===================================================== */
+
+    const particleLayer =
+      hero.querySelector('.hero-particles');
+
+
+    if (
+      particleLayer &&
+      !reducedMotion
+    ) {
+
+      particleLayer.replaceChildren();
+
+      const particleCount =
+        window.matchMedia(
+          '(max-width: 650px)'
+        ).matches
+          ? 18
+          : 38;
+
+      const fragment =
+        document.createDocumentFragment();
+
+
+      for (
+        let i = 0;
+        i < particleCount;
+        i++
+      ) {
+
+        const particle =
+          document.createElement('span');
+
+        particle.className =
+          'hero-particle';
+
+
+        const size =
+          Math.random() * 3 + 1;
+
+
+        const hue =
+          175 + Math.random() * 155;
+
+
+        particle.style.setProperty(
+          '--x',
+          `${Math.random() * 100}%`
+        );
+
+        particle.style.setProperty(
+          '--y',
+          `${Math.random() * 100}%`
+        );
+
+        particle.style.setProperty(
+          '--size',
+          `${size}px`
+        );
+
+        particle.style.setProperty(
+          '--hue',
+          hue
+        );
+
+        particle.style.setProperty(
+          '--duration',
+          `${6 + Math.random() * 10}s`
+        );
+
+        particle.style.setProperty(
+          '--delay',
+          `${Math.random() * -12}s`
+        );
+
+        fragment.appendChild(
+          particle
+        );
+      }
+
+
+      particleLayer.appendChild(
+        fragment
+      );
+    }
+
+
+    /* =====================================================
+       3. Longer digital-decode title
+    ===================================================== */
+
+    const title =
+      document.getElementById('home-title');
+
+    let titleDecodeRunning =
+      false;
+
+    let lastTitleDecode =
+      0;
+
+
+    function decodeTitle() {
+      if (
+        !title ||
+        reducedMotion ||
+        titleDecodeRunning
+      ) {
+        return;
+      }
+
+      const originalText =
+        title.textContent.trim();
+
+      if (!originalText) return;
+
+      titleDecodeRunning =
+        true;
+
+      lastTitleDecode =
+        performance.now();
+
+      const characters =
+        '01<>[]{}#*+/|░▒▓◇◆';
+
+      const totalFrames =
+        48;
+
+      let frame =
+        0;
+
+
+      const timer =
+        window.setInterval(() => {
+
+          const progress =
+            frame / totalFrames;
+
+
+          title.textContent =
+            [...originalText]
+              .map(
+                (
+                  character,
+                  index
+                ) => {
+
+                  if (
+                    character === ' ' ||
+                    character === '，' ||
+                    character === '。' ||
+                    character === '/' ||
+                    character === '、' ||
+                    character === '·'
+                  ) {
+                    return character;
+                  }
+
+
+                  const revealPoint =
+                    index /
+                    originalText.length;
+
+
+                  if (
+                    revealPoint <
+                    progress
+                  ) {
+                    return character;
+                  }
+
+
+                  return Math.random() > .48
+                    ? characters[
+                        Math.floor(
+                          Math.random() *
+                          characters.length
+                        )
+                      ]
+                    : character;
+
+                }
+              )
+              .join('');
+
+
+          frame += 1;
+
+
+          if (
+            frame >
+            totalFrames
+          ) {
+
+            window.clearInterval(
+              timer
+            );
+
+            title.textContent =
+              originalText;
+
+            titleDecodeRunning =
+              false;
+
+          }
+
+        }, 50);
+    }
+
+
+    if (!reducedMotion) {
+      window.setTimeout(
+        decodeTitle,
+        280
+      );
+
+
+      hero.addEventListener(
+        'pointerenter',
+        () => {
+
+          if (
+            performance.now() -
+            lastTitleDecode >
+            9000
+          ) {
+            decodeTitle();
+          }
+
+        }
+      );
+    }
+
+
+    /* =====================================================
+       4. HUD slight 3D reaction
+    ===================================================== */
+
+    const panel =
+      hero.querySelector('.hud-panel');
+
+
+    if (
+      panel &&
+      !reducedMotion &&
+      window.matchMedia(
+        '(pointer:fine)'
+      ).matches
+    ) {
+
+      panel.addEventListener(
+        'pointermove',
+        event => {
+
+          const rect =
+            panel.getBoundingClientRect();
+
+          const px =
+            (event.clientX - rect.left) /
+              rect.width -
+            .5;
+
+          const py =
+            (event.clientY - rect.top) /
+              rect.height -
+            .5;
+
+
+          panel.style.transform =
+            `perspective(900px) ` +
+            `rotateX(${(-py * 3.3).toFixed(2)}deg) ` +
+            `rotateY(${(px * 4.4).toFixed(2)}deg) ` +
+            `translateY(-5px)`;
+
+        }
+      );
+
+
+      panel.addEventListener(
+        'pointerleave',
+        () => {
+
+          panel.style.transform =
+            '';
+
+        }
+      );
+
+    }
+
+
+    /* =====================================================
+       5. Legendary whale controller
+       - autonomous cruise
+       - click/tap target
+       - spray when it arrives
+       - light particles
+       - click energy wave
+    ===================================================== */
+
+    const whale =
+      hero.querySelector('.light-whale');
+
+    const whaleFxLayer =
+      whale?.querySelector('.whale-fx-layer');
+
+    const clickFxLayer =
+      hero.querySelector('.hero-click-fx');
+
+
+    if (!whale) return;
+
+
+    const whaleState = {
+      x: 44,
+      y: 36,
+      tx: 44,
+      ty: 36,
+      tilt: 0,
+      targetTilt: 0,
+      facing: 1,
+
+      manualUntil: 0,
+      nextCruiseAt: 0,
+
+      sprayPending: false,
+      sprayCooldownUntil: 0,
+
+      lastFrame: performance.now()
+    };
+
+
+    function heroBounds() {
+      return hero.getBoundingClientRect();
+    }
+
+
+    function whaleDimensions() {
+      return {
+        width:
+          whale.offsetWidth || 280,
+
+        height:
+          whale.offsetHeight || 150
+      };
+    }
+
+
+    function setFacing(
+      targetX
+    ) {
+
+      const dx =
+        targetX -
+        whaleState.x;
+
+
+      if (
+        Math.abs(dx) >
+        8
+      ) {
+
+        whaleState.facing =
+          dx >= 0
+            ? 1
+            : -1;
+
+        hero.style.setProperty(
+          '--whale-facing',
+          whaleState.facing
+        );
+
+      }
+
+    }
+
+
+    function setTargetByLocalPoint(
+      localX,
+      localY,
+      options = {}
+    ) {
+
+      const rect =
+        heroBounds();
+
+      const {
+        width,
+        height
+      } =
+        whaleDimensions();
+
+
+      const maxY =
+        Math.max(
+          16,
+          Math.min(
+            rect.height * .56,
+            rect.height -
+              height -
+              16
+          )
+        );
+
+
+      const targetX =
+        clamp(
+          localX -
+            width * .5,
+          8,
+          Math.max(
+            8,
+            rect.width -
+              width -
+              8
+          )
+        );
+
+
+      const targetY =
+        clamp(
+          localY -
+            height * .50,
+          10,
+          maxY
+        );
+
+
+      setFacing(
+        targetX
+      );
+
+
+      whaleState.tx =
+        targetX;
+
+      whaleState.ty =
+        targetY;
+
+
+      const verticalDelta =
+        targetY -
+        whaleState.y;
+
+
+      whaleState.targetTilt =
+        clamp(
+          verticalDelta * .045,
+          -8,
+          8
+        );
+
+
+      if (options.manual) {
+
+        whaleState.manualUntil =
+          performance.now() +
+          6800;
+
+      }
+
+
+      if (options.spray) {
+
+        whaleState.sprayPending =
+          true;
+
+      }
+
+
+      if (options.snap) {
+
+        whaleState.x =
+          targetX;
+
+        whaleState.y =
+          targetY;
+
+        whaleState.tilt =
+          whaleState.targetTilt;
+
+      }
+
+    }
+
+
+    function chooseCruiseTarget() {
+
+      const rect =
+        heroBounds();
+
+
+      const x =
+        rect.width *
+        (
+          .09 +
+          Math.random() * .80
+        );
+
+
+      const y =
+        rect.height *
+        (
+          .08 +
+          Math.random() * .38
+        );
+
+
+      setTargetByLocalPoint(
+        x,
+        y
+      );
+
+
+      whaleState.nextCruiseAt =
+        performance.now() +
+        4200 +
+        Math.random() * 3800;
+
+    }
+
+
+    /* -----------------------------------------------------
+       Click/tap target wave
+    ----------------------------------------------------- */
+
+    function createTargetWave(
+      localX,
+      localY
+    ) {
+
+      if (
+        !clickFxLayer ||
+        reducedMotion
+      ) {
+        return;
+      }
+
+
+      const wave =
+        document.createElement(
+          'span'
+        );
+
+      wave.className =
+        'hero-target-wave';
+
+      wave.style.left =
+        `${localX}px`;
+
+      wave.style.top =
+        `${localY}px`;
+
+
+      clickFxLayer.appendChild(
+        wave
+      );
+
+
+      wave.animate(
+        [
+          {
+            opacity: .95,
+            transform:
+              'scale(.25)'
+          },
+          {
+            opacity: .72,
+            transform:
+              'scale(3.6)',
+            offset: .42
+          },
+          {
+            opacity: 0,
+            transform:
+              'scale(10)'
+          }
+        ],
+        {
+          duration: 1350,
+          easing:
+            'cubic-bezier(.16,.84,.27,1)',
+          fill: 'forwards'
+        }
+      ).finished
+        .catch(() => {})
+        .finally(
+          () => wave.remove()
+        );
+
+
+      const dot =
+        document.createElement(
+          'span'
+        );
+
+      dot.className =
+        'hero-target-dot';
+
+      dot.style.left =
+        `${localX}px`;
+
+      dot.style.top =
+        `${localY}px`;
+
+
+      clickFxLayer.appendChild(
+        dot
+      );
+
+
+      dot.animate(
+        [
+          {
+            opacity: 1,
+            transform: 'scale(.7)'
+          },
+          {
+            opacity: 1,
+            transform: 'scale(1.6)'
+          },
+          {
+            opacity: 0,
+            transform: 'scale(.2)'
+          }
+        ],
+        {
+          duration: 820,
+          easing: 'ease-out',
+          fill: 'forwards'
+        }
+      ).finished
+        .catch(() => {})
+        .finally(
+          () => dot.remove()
+        );
+
+    }
+
+
+    /* -----------------------------------------------------
+       Spray + mist + light particles
+    ----------------------------------------------------- */
+
+    function sprayWater() {
+
+      if (
+        !whaleFxLayer ||
+        reducedMotion
+      ) {
+        return;
+      }
+
+
+      const now =
+        performance.now();
+
+
+      if (
+        now <
+        whaleState.sprayCooldownUntil
+      ) {
+        return;
+      }
+
+
+      whaleState.sprayCooldownUntil =
+        now + 650;
+
+
+      const {
+        width,
+        height
+      } =
+        whaleDimensions();
+
+
+      const startX =
+        whaleState.facing === 1
+          ? width * .685
+          : width * .315;
+
+
+      const startY =
+        height * .36;
+
+
+      /* Mist */
+
+      const mist =
+        document.createElement(
+          'span'
+        );
+
+      mist.className =
+        'whale-spray-mist';
+
+      mist.style.left =
+        `${startX}px`;
+
+      mist.style.top =
+        `${startY}px`;
+
+
+      whaleFxLayer.appendChild(
+        mist
+      );
+
+
+      mist.animate(
+        [
+          {
+            opacity: 0,
+            transform:
+              'translateY(0) scale(.4)'
+          },
+          {
+            opacity: .72,
+            transform:
+              'translateY(-24px) scale(1)',
+            offset: .36
+          },
+          {
+            opacity: 0,
+            transform:
+              'translateY(-58px) scale(1.8)'
+          }
+        ],
+        {
+          duration: 980,
+          easing: 'ease-out',
+          fill: 'forwards'
+        }
+      ).finished
+        .catch(() => {})
+        .finally(
+          () => mist.remove()
+        );
+
+
+      /* Water beads */
+
+      const dropCount =
+        window.matchMedia(
+          '(max-width: 650px)'
+        ).matches
+          ? 14
+          : 24;
+
+
+      for (
+        let i = 0;
+        i < dropCount;
+        i++
+      ) {
+
+        const drop =
+          document.createElement(
+            'span'
+          );
+
+        drop.className =
+          'whale-water-drop';
+
+
+        drop.style.left =
+          `${startX}px`;
+
+        drop.style.top =
+          `${startY}px`;
+
+
+        drop.style.setProperty(
+          '--drop-w',
+          `${3 + Math.random() * 4}px`
+        );
+
+        drop.style.setProperty(
+          '--drop-h',
+          `${8 + Math.random() * 12}px`
+        );
+
+
+        whaleFxLayer.appendChild(
+          drop
+        );
+
+
+        const horizontal =
+          (Math.random() - .5) *
+          96;
+
+
+        const rise =
+          72 +
+          Math.random() * 90;
+
+
+        const fall =
+          20 +
+          Math.random() * 46;
+
+
+        const drift =
+          horizontal * 1.18;
+
+
+        const duration =
+          780 +
+          Math.random() * 520;
+
+
+        drop.animate(
+          [
+            {
+              opacity: 0,
+              transform:
+                'translate(0, 0) scale(.45)'
+            },
+            {
+              opacity: .96,
+              transform:
+                `translate(${horizontal * .25}px, ${-rise * .58}px) scale(.88)`,
+              offset: .34
+            },
+            {
+              opacity: .82,
+              transform:
+                `translate(${horizontal * .70}px, ${-rise}px) scale(1)`,
+              offset: .62
+            },
+            {
+              opacity: 0,
+              transform:
+                `translate(${drift}px, ${-rise + fall}px) scale(.78)`
+            }
+          ],
+          {
+            duration,
+            easing:
+              'cubic-bezier(.14,.65,.22,1)',
+            fill: 'forwards'
+          }
+        ).finished
+          .catch(() => {})
+          .finally(
+            () => drop.remove()
+          );
+
+      }
+
+
+      /* Light sparks */
+
+      const sparkCount =
+        window.matchMedia(
+          '(max-width: 650px)'
+        ).matches
+          ? 10
+          : 18;
+
+
+      const sparkColors = [
+        '#83fff4',
+        '#9adfff',
+        '#b9a3ff',
+        '#ffb1ea',
+        '#ffffff'
+      ];
+
+
+      for (
+        let i = 0;
+        i < sparkCount;
+        i++
+      ) {
+
+        const spark =
+          document.createElement(
+            'span'
+          );
+
+        spark.className =
+          'whale-light-particle';
+
+
+        spark.style.left =
+          `${startX}px`;
+
+        spark.style.top =
+          `${startY}px`;
+
+
+        spark.style.setProperty(
+          '--spark-size',
+          `${2 + Math.random() * 4}px`
+        );
+
+
+        spark.style.setProperty(
+          '--spark-color',
+          sparkColors[
+            Math.floor(
+              Math.random() *
+              sparkColors.length
+            )
+          ]
+        );
+
+
+        whaleFxLayer.appendChild(
+          spark
+        );
+
+
+        const sx =
+          (Math.random() - .5) *
+          130;
+
+
+        const sy =
+          -55 -
+          Math.random() * 105;
+
+
+        const sparkDuration =
+          650 +
+          Math.random() * 700;
+
+
+        spark.animate(
+          [
+            {
+              opacity: 0,
+              transform:
+                'translate(0,0) scale(.2)'
+            },
+            {
+              opacity: 1,
+              transform:
+                `translate(${sx * .4}px, ${sy * .55}px) scale(1.1)`,
+              offset: .38
+            },
+            {
+              opacity: 0,
+              transform:
+                `translate(${sx}px, ${sy}px) scale(.25)`
+            }
+          ],
+          {
+            duration:
+              sparkDuration,
+
+            easing:
+              'cubic-bezier(.18,.7,.2,1)',
+
+            fill:
+              'forwards'
+          }
+        ).finished
+          .catch(() => {})
+          .finally(
+            () => spark.remove()
+          );
+
+      }
+
+
+      /* Arrival glow */
+
+      whale.classList.add(
+        'whale-arrived'
+      );
+
+
+      window.setTimeout(
+        () => {
+
+          whale.classList.remove(
+            'whale-arrived'
+          );
+
+        },
+        720
+      );
+
+    }
+
+
+    /* -----------------------------------------------------
+       Manual click / touch
+    ----------------------------------------------------- */
+
+    hero.addEventListener(
+      'pointerdown',
+      event => {
+
+        if (
+          reducedMotion
+        ) {
+          return;
+        }
+
+
+        const rect =
+          heroBounds();
+
+
+        const localX =
+          event.clientX -
+          rect.left;
+
+
+        const localY =
+          event.clientY -
+          rect.top;
+
+
+        createTargetWave(
+          localX,
+          localY
+        );
+
+
+        setTargetByLocalPoint(
+          localX,
+          localY,
+          {
+            manual: true,
+            spray: true
+          }
+        );
+
+      }
+    );
+
+
+    /* -----------------------------------------------------
+       Animation loop + autonomous cruise
+    ----------------------------------------------------- */
+
+    function animateWhale(
+      timestamp
+    ) {
+
+      const now =
+        timestamp ||
+        performance.now();
+
+
+      const dt =
+        Math.min(
+          34,
+          now -
+          whaleState.lastFrame
+        );
+
+
+      whaleState.lastFrame =
+        now;
+
+
+      if (
+        !reducedMotion &&
+        now >=
+          whaleState.manualUntil &&
+        now >=
+          whaleState.nextCruiseAt
+      ) {
+
+        chooseCruiseTarget();
+
+      }
+
+
+      const easing =
+        1 -
+        Math.pow(
+          .93,
+          dt / 16.67
+        );
+
+
+      whaleState.x +=
+        (
+          whaleState.tx -
+          whaleState.x
+        ) *
+        easing;
+
+
+      whaleState.y +=
+        (
+          whaleState.ty -
+          whaleState.y
+        ) *
+        easing;
+
+
+      whaleState.tilt +=
+        (
+          whaleState.targetTilt -
+          whaleState.tilt
+        ) *
+        Math.min(
+          .12,
+          easing * 1.55
+        );
+
+
+      hero.style.setProperty(
+        '--whale-x',
+        `${whaleState.x.toFixed(2)}px`
+      );
+
+
+      hero.style.setProperty(
+        '--whale-y',
+        `${whaleState.y.toFixed(2)}px`
+      );
+
+
+      hero.style.setProperty(
+        '--whale-tilt',
+        `${whaleState.tilt.toFixed(2)}deg`
+      );
+
+
+      const distance =
+        Math.hypot(
+          whaleState.tx -
+            whaleState.x,
+
+          whaleState.ty -
+            whaleState.y
+        );
+
+
+      if (
+        whaleState.sprayPending &&
+        distance <
+        16
+      ) {
+
+        whaleState.sprayPending =
+          false;
+
+        sprayWater();
+
+      }
+
+
+      window.requestAnimationFrame(
+        animateWhale
+      );
+
+    }
+
+
+    /* -----------------------------------------------------
+       Initial position + first cruise
+    ----------------------------------------------------- */
+
+    const rect =
+      heroBounds();
+
+
+    setTargetByLocalPoint(
+      rect.width * .17,
+      rect.height * .18,
+      {
+        snap: true
+      }
+    );
+
+
+    whaleState.nextCruiseAt =
+      performance.now() +
+      2200;
+
+
+    if (!reducedMotion) {
+
+      window.requestAnimationFrame(
+        animateWhale
+      );
+
+    } else {
+
+      hero.style.setProperty(
+        '--whale-x',
+        `${whaleState.x}px`
+      );
+
+      hero.style.setProperty(
+        '--whale-y',
+        `${whaleState.y}px`
+      );
+
+    }
+
+
+    /* Re-clamp after resize / phone rotation */
+
+    window.addEventListener(
+      'resize',
+      () => {
+
+        const rect =
+          heroBounds();
+
+        const {
+          width,
+          height
+        } =
+          whaleDimensions();
+
+
+        whaleState.x =
+          clamp(
+            whaleState.x,
+            8,
+            Math.max(
+              8,
+              rect.width -
+              width -
+              8
+            )
+          );
+
+
+        whaleState.y =
+          clamp(
+            whaleState.y,
+            10,
+            Math.max(
+              10,
+              Math.min(
+                rect.height * .56,
+                rect.height -
+                  height -
+                  16
+              )
+            )
+          );
+
+
+        whaleState.tx =
+          whaleState.x;
+
+        whaleState.ty =
+          whaleState.y;
+
+      },
+      {
+        passive: true
+      }
+    );
+
+  }
+
   async function load() {
     let projects = demo.projects;
     let certifications = demo.certifications;
@@ -406,561 +1732,15 @@ Sales Order → Delivery → PGI → Customer Billing → Intercompany Billing
     if (match) openArticle(decodeURIComponent(match[1]));
   }
 
-  load().catch(err => {
-    console.error(err);
-    document.getElementById('article-grid').innerHTML = '<div class="notice">讀取資料失敗，請檢查 config.js 與 Supabase。</div>';
-  });
+  load()
+    .then(() => {
+      initCyberHero();
+    })
+    .catch(err => {
+      console.error(err);
+      document.getElementById('article-grid').innerHTML = '<div class="notice">讀取資料失敗，請檢查 config.js 與 Supabase。</div>';
+
+      // Even if remote content fails, keep the visual hero usable.
+      initCyberHero();
+    });
 })();
-
-/* =========================================================
-   CYBER HERO EFFECTS
-   Gibson Hsieh SAP / ERP Portfolio
-========================================================= */
-
-document.addEventListener("DOMContentLoaded", () => {
-
-  const hero = document.querySelector(".cyber-hero");
-
-  if (!hero) return;
-
-
-  /* =====================================================
-     1. Mouse Follow Light
-  ===================================================== */
-
-  hero.addEventListener("pointermove", (event) => {
-
-    const rect = hero.getBoundingClientRect();
-
-    if (!rect.width || !rect.height) return;
-
-
-    const x =
-      ((event.clientX - rect.left) / rect.width) * 100;
-
-    const y =
-      ((event.clientY - rect.top) / rect.height) * 100;
-
-
-    hero.style.setProperty(
-      "--mx",
-      `${Math.max(0, Math.min(100, x))}%`
-    );
-
-    hero.style.setProperty(
-      "--my",
-      `${Math.max(0, Math.min(100, y))}%`
-    );
-
-  });
-
-
-  hero.addEventListener("pointerleave", () => {
-
-    hero.style.setProperty(
-      "--mx",
-      "50%"
-    );
-
-    hero.style.setProperty(
-      "--my",
-      "50%"
-    );
-
-  });
-
-
-
-  /* =====================================================
-     2. Reduced Motion
-  ===================================================== */
-
-  const reducedMotion =
-    window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-
-
-
-  /* =====================================================
-     3. Particle Generator
-  ===================================================== */
-
-  const particleLayer =
-    hero.querySelector(".hero-particles");
-
-
-  if (
-    particleLayer &&
-    !reducedMotion
-  ) {
-
-    particleLayer.innerHTML = "";
-
-
-    const particleCount =
-      window.innerWidth <= 650
-        ? 18
-        : 34;
-
-
-    for (
-      let i = 0;
-      i < particleCount;
-      i++
-    ) {
-
-      const particle =
-        document.createElement("span");
-
-
-      particle.className =
-        "hero-particle";
-
-
-      const size =
-        Math.random() * 3 + 1;
-
-
-      const hue =
-        175 + Math.random() * 155;
-
-
-      particle.style.setProperty(
-        "--x",
-        `${Math.random() * 100}%`
-      );
-
-
-      particle.style.setProperty(
-        "--y",
-        `${Math.random() * 100}%`
-      );
-
-
-      particle.style.setProperty(
-        "--size",
-        `${size}px`
-      );
-
-
-      particle.style.setProperty(
-        "--hue",
-        hue
-      );
-
-
-      particle.style.setProperty(
-        "--duration",
-        `${5 + Math.random() * 8}s`
-      );
-
-
-      particle.style.setProperty(
-        "--delay",
-        `${Math.random() * -10}s`
-      );
-
-
-      particleLayer.appendChild(
-        particle
-      );
-
-    }
-
-  }
-
-
-
-  /* =====================================================
-     4. Digital Decode Title
-  ===================================================== */
-
-  function runTitleDecode() {
-
-    const title =
-      document.getElementById(
-        "home-title"
-      );
-
-
-    if (
-      !title ||
-      reducedMotion
-    ) {
-      return;
-    }
-
-
-    const originalText =
-      title.textContent.trim();
-
-
-    if (!originalText) return;
-
-
-    const characters =
-      "01<>[]{}#*+/|░▒▓◇◆";
-
-
-    const totalFrames =
-      26;
-
-
-    let frame =
-      0;
-
-
-    const timer =
-      window.setInterval(() => {
-
-        const progress =
-          frame / totalFrames;
-
-
-        title.textContent =
-          [...originalText]
-            .map(
-              (
-                character,
-                index
-              ) => {
-
-                if (
-                  character === " " ||
-                  character === "，" ||
-                  character === "。" ||
-                  character === "/" ||
-                  character === "、" ||
-                  character === "·"
-                ) {
-
-                  return character;
-
-                }
-
-
-                const revealPoint =
-                  index /
-                  originalText.length;
-
-
-                if (
-                  revealPoint <
-                  progress
-                ) {
-
-                  return character;
-
-                }
-
-
-                if (
-                  Math.random() >
-                  0.5
-                ) {
-
-                  return characters[
-                    Math.floor(
-                      Math.random() *
-                      characters.length
-                    )
-                  ];
-
-                }
-
-
-                return character;
-
-              }
-            )
-            .join("");
-
-
-        frame++;
-
-
-        if (
-          frame >
-          totalFrames
-        ) {
-
-          window.clearInterval(
-            timer
-          );
-
-
-          title.textContent =
-            originalText;
-
-        }
-
-      }, 42);
-
-  }
-
-
-
-  /* 等原本 Supabase / Home 資料載入後再跑 */
-
-  window.setTimeout(
-    runTitleDecode,
-    700
-  );
-
-
-
-  /* =====================================================
-     5. HUD 3D Mouse Tilt
-  ===================================================== */
-
-  const panel =
-    hero.querySelector(
-      ".hud-panel"
-    );
-
-
-  if (
-    panel &&
-    !reducedMotion &&
-    window.matchMedia(
-      "(pointer:fine)"
-    ).matches
-  ) {
-
-    panel.addEventListener(
-      "pointermove",
-      (event) => {
-
-        const rect =
-          panel.getBoundingClientRect();
-
-
-        const px =
-          (event.clientX -
-            rect.left) /
-            rect.width -
-          0.5;
-
-
-        const py =
-          (event.clientY -
-            rect.top) /
-            rect.height -
-          0.5;
-
-
-        const rotateX =
-          -py * 3.5;
-
-
-        const rotateY =
-          px * 4.5;
-
-
-        panel.style.transform =
-          `
-          perspective(900px)
-          rotateX(${rotateX}deg)
-          rotateY(${rotateY}deg)
-          translateY(-4px)
-          `;
-
-      }
-    );
-
-
-    panel.addEventListener(
-      "pointerleave",
-      () => {
-
-        panel.style.transform =
-          "";
-
-      }
-    );
-
-  }
-
-
-
-  /* =====================================================
-     6. Restore Cyber Arrow On Main Button
-  ===================================================== */
-
-  window.setTimeout(() => {
-
-    const button =
-      document.getElementById(
-        "home-btn-1"
-      );
-
-
-    if (
-      button &&
-      !button.querySelector(
-        ".button-arrow"
-      )
-    ) {
-
-      const label =
-        button.textContent.trim();
-
-
-      button.innerHTML =
-        `
-        <span>${label}</span>
-        <span class="button-arrow">↗</span>
-        `;
-
-    }
-
-  }, 1000);
-
-
-
-  /* =====================================================
-     7. Skill Chips Stagger Animation
-  ===================================================== */
-
-  window.setTimeout(() => {
-
-    const chips =
-      document.querySelectorAll(
-        ".hud-skills span"
-      );
-
-
-    chips.forEach(
-      (
-        chip,
-        index
-      ) => {
-
-        chip.style.opacity =
-          "0";
-
-
-        chip.style.transform =
-          "translateY(12px)";
-
-
-        chip.style.transition =
-          `
-          opacity .45s ease,
-          transform .45s ease,
-          border-color .25s ease,
-          box-shadow .25s ease
-          `;
-
-
-        window.setTimeout(
-          () => {
-
-            chip.style.opacity =
-              "1";
-
-
-            chip.style.transform =
-              "translateY(0)";
-
-          },
-          600 +
-          index * 70
-        );
-
-      }
-    );
-
-  }, 200);
-
-
-
-  /* =====================================================
-     8. HUD Boot Effect
-  ===================================================== */
-
-  const core =
-    hero.querySelector(
-      ".hud-core"
-    );
-
-
-  if (
-    core &&
-    !reducedMotion
-  ) {
-
-    core.style.opacity =
-      "0";
-
-
-    core.style.transform =
-      "scale(.72)";
-
-
-    core.style.transition =
-      `
-      opacity .8s ease,
-      transform .9s
-      cubic-bezier(.2,.8,.2,1)
-      `;
-
-
-    window.setTimeout(
-      () => {
-
-        core.style.opacity =
-          "1";
-
-
-        core.style.transform =
-          "scale(1)";
-
-      },
-      450
-    );
-
-  }
-
-});
-
-  /* =====================================================
-     9. Whale Light Burst
-  ===================================================== */
-
-  const whale =
-    hero.querySelector(".light-whale");
-
-  function whaleBurst() {
-    if (!whale || reducedMotion) return;
-
-    whale.animate(
-      [
-        {
-          transform: "scale(1)",
-          filter: "drop-shadow(0 0 18px rgba(105,255,240,0.22))"
-        },
-        {
-          transform: "scale(1.06)",
-          filter: "drop-shadow(0 0 30px rgba(105,255,240,0.42))"
-        },
-        {
-          transform: "scale(1)",
-          filter: "drop-shadow(0 0 18px rgba(105,255,240,0.22))"
-        }
-      ],
-      {
-        duration: 900,
-        easing: "ease-out"
-      }
-    );
-  }
-
-  hero.addEventListener("mouseenter", () => {
-    whaleBurst();
-  });
-
-  hero.addEventListener("click", () => {
-    whaleBurst();
-  });

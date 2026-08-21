@@ -26,7 +26,6 @@
 
     <div class="container nav-wrap">
 
-      <!-- Logo -->
       <a
         id="site-brand"
         class="brand"
@@ -36,10 +35,8 @@
       </a>
 
 
-      <!-- Header Right -->
       <div class="header-actions">
 
-        <!-- Navigation -->
         <nav class="nav-links">
 
           <a href="#articles">
@@ -94,33 +91,403 @@
         aria-hidden="true"
       >
 
-        <!-- Moving Grid -->
         <div class="hero-grid-lines"></div>
 
-
-        <!-- Aurora -->
         <div class="hero-aurora hero-aurora-a"></div>
-
         <div class="hero-aurora hero-aurora-b"></div>
-
         <div class="hero-aurora hero-aurora-c"></div>
 
-
-        <!-- JS Generated Particles -->
         <div class="hero-particles"></div>
 
-
-        <!-- Scan Light -->
         <div class="hero-scanline"></div>
-        <div class="light-whale" aria-hidden="true">
-  <span class="whale-trail"></span>
-  <span class="whale-body"></span>
-  <span class="whale-belly"></span>
-  <span class="whale-fin whale-fin-top"></span>
-  <span class="whale-fin whale-fin-side"></span>
-  <span class="whale-tail"></span>
-  <span class="whale-eye"></span>
-</div>
+
+
+        <!-- =========================================
+             Legendary Light Whale
+             SVG + JS-controlled movement
+        ========================================== -->
+
+        <div class="light-whale">
+
+          <div class="whale-svg-shell">
+
+            <svg
+              class="whale-svg"
+              viewBox="0 0 520 280"
+              xmlns="http://www.w3.org/2000/svg"
+              role="presentation"
+            >
+
+              <defs>
+
+                <linearGradient
+                  id="whaleBodyGrad"
+                  x1="5%"
+                  y1="5%"
+                  x2="100%"
+                  y2="90%"
+                >
+                  <stop offset="0%" stop-color="#d8ffff" stop-opacity=".96" />
+                  <stop offset="18%" stop-color="#79fff1" stop-opacity=".92" />
+                  <stop offset="48%" stop-color="#58d8ff" stop-opacity=".88" />
+                  <stop offset="73%" stop-color="#927cff" stop-opacity=".84" />
+                  <stop offset="100%" stop-color="#ff89df" stop-opacity=".72" />
+                </linearGradient>
+
+
+                <linearGradient
+                  id="whaleFinGrad"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="100%"
+                >
+                  <stop offset="0%" stop-color="#b9ffff" stop-opacity=".90" />
+                  <stop offset="45%" stop-color="#6beee9" stop-opacity=".80" />
+                  <stop offset="100%" stop-color="#937fff" stop-opacity=".58" />
+                </linearGradient>
+
+
+                <linearGradient
+                  id="whaleTrailGrad"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="0%"
+                >
+                  <stop offset="0%" stop-color="#78fff1" stop-opacity="0" />
+                  <stop offset="40%" stop-color="#78fff1" stop-opacity=".24" />
+                  <stop offset="76%" stop-color="#8f86ff" stop-opacity=".42" />
+                  <stop offset="100%" stop-color="#ff8de2" stop-opacity=".12" />
+                </linearGradient>
+
+
+                <radialGradient
+                  id="whaleAura"
+                  cx="56%"
+                  cy="48%"
+                  r="54%"
+                >
+                  <stop offset="0%" stop-color="#75fff0" stop-opacity=".36" />
+                  <stop offset="48%" stop-color="#69cfff" stop-opacity=".18" />
+                  <stop offset="76%" stop-color="#997dff" stop-opacity=".11" />
+                  <stop offset="100%" stop-color="#ff87dc" stop-opacity="0" />
+                </radialGradient>
+
+
+                <radialGradient
+                  id="whaleEyeGlow"
+                  cx="50%"
+                  cy="50%"
+                  r="50%"
+                >
+                  <stop offset="0%" stop-color="#ffffff" stop-opacity="1" />
+                  <stop offset="35%" stop-color="#9ffff7" stop-opacity=".92" />
+                  <stop offset="100%" stop-color="#68f7ff" stop-opacity="0" />
+                </radialGradient>
+
+
+                <filter
+                  id="whaleGlow"
+                  x="-40%"
+                  y="-40%"
+                  width="180%"
+                  height="180%"
+                >
+                  <feGaussianBlur
+                    stdDeviation="5.5"
+                    result="coloredBlur"
+                  />
+
+                  <feMerge>
+                    <feMergeNode in="coloredBlur" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+
+                </filter>
+
+
+                <filter
+                  id="softBlur"
+                  x="-40%"
+                  y="-40%"
+                  width="180%"
+                  height="180%"
+                >
+                  <feGaussianBlur stdDeviation="7" />
+                </filter>
+
+              </defs>
+
+
+              <!-- Aura -->
+              <ellipse
+                class="whale-aura"
+                cx="284"
+                cy="145"
+                rx="184"
+                ry="94"
+                fill="url(#whaleAura)"
+              />
+
+
+              <!-- Long holographic trails -->
+              <g class="whale-trails">
+
+                <path
+                  d="M12 146 C70 123 124 124 184 143"
+                  fill="none"
+                  stroke="url(#whaleTrailGrad)"
+                  stroke-width="14"
+                  stroke-linecap="round"
+                  opacity=".52"
+                  filter="url(#softBlur)"
+                />
+
+                <path
+                  d="M8 151 C77 135 122 136 176 150"
+                  fill="none"
+                  stroke="#6ffff0"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  opacity=".28"
+                />
+
+                <path
+                  d="M24 163 C86 149 127 149 171 157"
+                  fill="none"
+                  stroke="#a28aff"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  opacity=".19"
+                />
+
+              </g>
+
+
+              <!-- Tail group -->
+              <g class="whale-tail-group">
+
+                <path
+                  d="
+                    M108 145
+                    C78 119 47 99 18 108
+                    C40 128 48 143 40 153
+                    C31 166 21 174 11 179
+                    C49 190 82 173 112 151
+                    Z
+                  "
+                  fill="url(#whaleFinGrad)"
+                  opacity=".90"
+                  filter="url(#whaleGlow)"
+                />
+
+                <path
+                  d="
+                    M104 145
+                    C75 129 49 122 25 126
+                  "
+                  fill="none"
+                  stroke="#e1ffff"
+                  stroke-width="1.8"
+                  opacity=".32"
+                />
+
+                <path
+                  d="
+                    M104 151
+                    C73 162 48 173 24 177
+                  "
+                  fill="none"
+                  stroke="#9cfaff"
+                  stroke-width="1.4"
+                  opacity=".22"
+                />
+
+              </g>
+
+
+              <!-- Body -->
+              <g
+                class="whale-body-group"
+                filter="url(#whaleGlow)"
+              >
+
+                <path
+                  class="whale-body-path"
+                  d="
+                    M102 142
+                    C126 99 174 74 244 69
+                    C322 63 399 89 449 128
+                    C468 143 489 149 508 143
+                    C500 159 486 171 462 178
+                    C428 212 363 229 285 228
+                    C211 228 154 208 121 181
+                    C103 173 90 159 84 148
+                    C91 149 97 146 102 142
+                    Z
+                  "
+                  fill="url(#whaleBodyGrad)"
+                />
+
+
+                <!-- translucent belly -->
+                <path
+                  d="
+                    M147 177
+                    C207 205 334 206 418 168
+                    C389 211 218 227 147 177
+                    Z
+                  "
+                  fill="rgba(239,255,255,.17)"
+                />
+
+
+                <!-- upper dorsal fin -->
+                <path
+                  class="whale-fin-top"
+                  d="
+                    M266 77
+                    C278 55 297 40 316 43
+                    C314 62 300 80 280 94
+                    Z
+                  "
+                  fill="url(#whaleFinGrad)"
+                  opacity=".86"
+                />
+
+
+                <!-- side fin -->
+                <path
+                  class="whale-fin-side"
+                  d="
+                    M292 182
+                    C321 173 344 178 359 193
+                    C338 211 311 216 283 205
+                    Z
+                  "
+                  fill="url(#whaleFinGrad)"
+                  opacity=".72"
+                />
+
+
+                <!-- Mystic body lines -->
+                <g class="whale-runes">
+
+                  <path
+                    d="M162 122 C224 95 337 95 411 121"
+                    fill="none"
+                    stroke="rgba(237,255,255,.42)"
+                    stroke-width="2.3"
+                    stroke-linecap="round"
+                  />
+
+                  <path
+                    d="M147 143 C226 120 346 120 426 144"
+                    fill="none"
+                    stroke="rgba(104,255,241,.40)"
+                    stroke-width="1.7"
+                    stroke-linecap="round"
+                  />
+
+                  <path
+                    d="M163 165 C231 151 332 151 396 165"
+                    fill="none"
+                    stroke="rgba(198,176,255,.28)"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                  />
+
+
+                  <path
+                    d="M215 106 l11 8 -11 8 -11 -8 z"
+                    fill="none"
+                    stroke="rgba(221,255,255,.52)"
+                    stroke-width="1.4"
+                  />
+
+                  <circle
+                    cx="260"
+                    cy="142"
+                    r="7"
+                    fill="none"
+                    stroke="rgba(118,255,241,.45)"
+                    stroke-width="1.4"
+                  />
+
+                  <path
+                    d="M302 120 l9 9 -9 9 -9 -9 z"
+                    fill="none"
+                    stroke="rgba(169,147,255,.45)"
+                    stroke-width="1.2"
+                  />
+
+                </g>
+
+
+                <!-- Blowhole -->
+                <ellipse
+                  class="whale-blowhole"
+                  cx="357"
+                  cy="101"
+                  rx="6"
+                  ry="2.4"
+                  fill="rgba(235,255,255,.82)"
+                />
+
+
+                <!-- Eye -->
+                <circle
+                  cx="421"
+                  cy="135"
+                  r="14"
+                  fill="url(#whaleEyeGlow)"
+                  opacity=".40"
+                />
+
+                <circle
+                  cx="421"
+                  cy="135"
+                  r="4"
+                  fill="#ffffff"
+                />
+
+                <circle
+                  cx="421"
+                  cy="135"
+                  r="8"
+                  fill="none"
+                  stroke="rgba(112,255,244,.54)"
+                  stroke-width="1.3"
+                />
+
+              </g>
+
+
+              <!-- hologram dust -->
+              <g class="whale-holo-dots">
+                <circle cx="179" cy="98" r="2" fill="#9ffff7" />
+                <circle cx="196" cy="183" r="1.6" fill="#b19cff" />
+                <circle cx="242" cy="82" r="1.8" fill="#ffffff" />
+                <circle cx="327" cy="87" r="1.4" fill="#7ffff2" />
+                <circle cx="373" cy="179" r="1.7" fill="#ffabeb" />
+                <circle cx="447" cy="159" r="1.2" fill="#ffffff" />
+              </g>
+
+            </svg>
+
+          </div>
+
+
+          <!-- spray / particles are injected here by JS -->
+          <div class="whale-fx-layer"></div>
+
+        </div>
+
+
+        <!-- Click energy waves injected here -->
+        <div class="hero-click-fx"></div>
+
       </div>
 
 
@@ -135,7 +502,6 @@
         <div class="hero-copy-wrap">
 
 
-          <!-- System Status -->
           <div class="system-pill">
 
             <span class="system-dot"></span>
@@ -152,7 +518,6 @@
 
 
 
-          <!-- Eyebrow -->
           <div
             id="home-eyebrow"
             class="eyebrow neon-eyebrow"
@@ -162,7 +527,6 @@
 
 
 
-          <!-- Main Title -->
           <h1
             id="home-title"
             class="hero-title"
@@ -172,7 +536,6 @@
 
 
 
-          <!-- Hero Copy -->
           <p
             id="home-copy"
             class="hero-copy"
@@ -182,17 +545,14 @@
 
 
 
-          <!-- Main Buttons -->
           <div class="button-row hero-actions">
 
 
-            <!-- Articles -->
             <a
               id="home-btn-1"
               class="button primary"
               href="#articles"
             >
-
               <span>
                 看 SAP 文章
               </span>
@@ -200,12 +560,9 @@
               <span class="button-arrow">
                 ↗
               </span>
-
             </a>
 
 
-
-            <!-- Resume -->
             <a
               id="home-btn-2"
               class="button secondary"
@@ -215,8 +572,6 @@
             </a>
 
 
-
-            <!-- Certifications -->
             <a
               id="home-btn-3"
               class="button secondary"
@@ -226,8 +581,6 @@
             </a>
 
 
-
-            <!-- Projects -->
             <a
               id="home-btn-4"
               class="button secondary"
@@ -241,7 +594,6 @@
 
 
 
-          <!-- Tech Tags -->
           <div class="hero-tech-line">
 
             <span>
@@ -279,18 +631,12 @@
         <div class="hero-panel hud-panel">
 
 
-          <!-- HUD Corners -->
           <span class="hud-corner hud-tl"></span>
-
           <span class="hud-corner hud-tr"></span>
-
           <span class="hud-corner hud-bl"></span>
-
           <span class="hud-corner hud-br"></span>
 
 
-
-          <!-- HUD Header -->
           <div class="panel-status">
 
             <div>
@@ -312,21 +658,14 @@
 
 
 
-          <!-- =========================
-               SAP Energy Core
-          ========================== -->
-
           <div
             class="hud-core"
             aria-hidden="true"
           >
 
             <span class="orbit orbit-one"></span>
-
             <span class="orbit orbit-two"></span>
-
             <span class="orbit orbit-three"></span>
-
             <span class="core-glow"></span>
 
 
@@ -346,7 +685,6 @@
 
 
 
-          <!-- Focus Title -->
           <span
             id="home-focus-title"
             class="panel-kicker"
@@ -356,53 +694,25 @@
 
 
 
-          <!-- Focus Areas -->
           <div
             id="home-focus-areas"
             class="skill-cloud hud-skills"
           >
 
-            <span>
-              SAP MM
-            </span>
-
-            <span>
-              SAP SD
-            </span>
-
-            <span>
-              Procurement
-            </span>
-
-            <span>
-              Order-to-Cash
-            </span>
-
-            <span>
-              Integration
-            </span>
-
-            <span>
-              Support
-            </span>
-
-            <span>
-              UAT
-            </span>
-
-            <span>
-              Process Design
-            </span>
-
-            <span>
-              Performance
-            </span>
+            <span>SAP MM</span>
+            <span>SAP SD</span>
+            <span>Procurement</span>
+            <span>Order-to-Cash</span>
+            <span>Integration</span>
+            <span>Support</span>
+            <span>UAT</span>
+            <span>Process Design</span>
+            <span>Performance</span>
 
           </div>
 
 
 
-          <!-- HUD Footer -->
           <div class="hud-footer">
 
             <span>
@@ -454,11 +764,9 @@
         id="article-grid"
         class="card-grid"
       >
-
         <div class="loading">
           讀取中…
         </div>
-
       </div>
 
     </section>
@@ -491,8 +799,6 @@
           </div>
 
 
-
-          <!-- Resume Download Buttons -->
           <div class="resume-section-actions">
 
             <a
@@ -517,16 +823,13 @@
         </div>
 
 
-
         <div
           id="resume-content"
           class="markdown"
         >
-
           <div class="loading">
             讀取中…
           </div>
-
         </div>
 
       </div>
@@ -563,16 +866,13 @@
         </div>
 
 
-
         <div
           id="cert-grid"
           class="cert-grid"
         >
-
           <div class="loading">
             讀取中…
           </div>
-
         </div>
 
       </div>
@@ -609,16 +909,13 @@
         </div>
 
 
-
         <div
           id="project-list"
           class="project-stack"
         >
-
           <div class="loading">
             讀取中…
           </div>
-
         </div>
 
       </div>
@@ -650,7 +947,6 @@
               聯絡我
             </h2>
 
-
             <p class="contact-intro">
               SAP / ERP 專案、職涯機會或合作需求，歡迎透過 LinkedIn 或 Email 與我聯絡。
             </p>
@@ -660,11 +956,9 @@
         </div>
 
 
-
         <div class="contact-grid">
 
 
-          <!-- LinkedIn -->
           <a
             class="contact-card"
             href="https://www.linkedin.com/in/gibson-%E8%AC%9D%E6%9B%B8%E6%96%87-09ab30239/"
@@ -675,7 +969,6 @@
             <span class="contact-icon">
               in
             </span>
-
 
             <div>
 
@@ -696,8 +989,6 @@
           </a>
 
 
-
-          <!-- Email -->
           <a
             class="contact-card"
             href="mailto:tsgcguitar@gmail.com"
@@ -706,7 +997,6 @@
             <span class="contact-icon">
               @
             </span>
-
 
             <div>
 
@@ -777,15 +1067,11 @@
     <div class="container">
 
       <span>
-
         ©
-
         <span id="year"></span>
-
         <span id="footer-brand">
           Gibson Hsieh
         </span>
-
       </span>
 
 
@@ -803,19 +1089,14 @@
        Scripts
   ========================== -->
 
-  <!-- Supabase -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-  <!-- Markdown -->
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
-  <!-- HTML Sanitizer -->
   <script src="https://cdn.jsdelivr.net/npm/dompurify/dist/purify.min.js"></script>
 
-  <!-- Project Config -->
   <script src="config.js"></script>
 
-  <!-- Main App -->
   <script src="app.js"></script>
 
 
