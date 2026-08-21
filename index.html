@@ -85,28 +85,86 @@
 
     <section
       id="home"
-      class="hero"
+      class="hero cyber-hero"
     >
 
-      <div class="container hero-grid">
+      <!-- Background FX -->
+      <div
+        class="hero-fx"
+        aria-hidden="true"
+      >
+
+        <!-- Moving Grid -->
+        <div class="hero-grid-lines"></div>
 
 
-        <!-- Left -->
-        <div>
+        <!-- Aurora -->
+        <div class="hero-aurora hero-aurora-a"></div>
 
+        <div class="hero-aurora hero-aurora-b"></div>
+
+        <div class="hero-aurora hero-aurora-c"></div>
+
+
+        <!-- JS Generated Particles -->
+        <div class="hero-particles"></div>
+
+
+        <!-- Scan Light -->
+        <div class="hero-scanline"></div>
+
+      </div>
+
+
+
+      <div class="container hero-grid hero-content">
+
+
+        <!-- =========================
+             Left
+        ========================== -->
+
+        <div class="hero-copy-wrap">
+
+
+          <!-- System Status -->
+          <div class="system-pill">
+
+            <span class="system-dot"></span>
+
+            <span>
+              ERP SYSTEM ONLINE
+            </span>
+
+            <span class="system-code">
+              NODE-01
+            </span>
+
+          </div>
+
+
+
+          <!-- Eyebrow -->
           <div
             id="home-eyebrow"
-            class="eyebrow"
+            class="eyebrow neon-eyebrow"
           >
             SAP · ERP · BUSINESS SYSTEMS
           </div>
 
 
-          <h1 id="home-title">
+
+          <!-- Main Title -->
+          <h1
+            id="home-title"
+            class="hero-title"
+          >
             把商業流程，變成真正能運作的系統。
           </h1>
 
 
+
+          <!-- Hero Copy -->
           <p
             id="home-copy"
             class="hero-copy"
@@ -115,8 +173,9 @@
           </p>
 
 
+
           <!-- Main Buttons -->
-          <div class="button-row">
+          <div class="button-row hero-actions">
 
 
             <!-- Articles -->
@@ -125,8 +184,17 @@
               class="button primary"
               href="#articles"
             >
-              看 SAP 文章
+
+              <span>
+                看 SAP 文章
+              </span>
+
+              <span class="button-arrow">
+                ↗
+              </span>
+
             </a>
+
 
 
             <!-- Resume -->
@@ -139,6 +207,7 @@
             </a>
 
 
+
             <!-- Certifications -->
             <a
               id="home-btn-3"
@@ -147,6 +216,7 @@
             >
               看證照
             </a>
+
 
 
             <!-- Projects -->
@@ -161,13 +231,114 @@
 
           </div>
 
+
+
+          <!-- Tech Tags -->
+          <div class="hero-tech-line">
+
+            <span>
+              PROCUREMENT
+            </span>
+
+            <i></i>
+
+            <span>
+              ORDER-TO-CASH
+            </span>
+
+            <i></i>
+
+            <span>
+              INTEGRATION
+            </span>
+
+            <i></i>
+
+            <span>
+              SUPPORT
+            </span>
+
+          </div>
+
         </div>
 
 
 
-        <!-- Right -->
-        <div class="hero-panel">
+        <!-- =========================
+             Right / HUD Panel
+        ========================== -->
 
+        <div class="hero-panel hud-panel">
+
+
+          <!-- HUD Corners -->
+          <span class="hud-corner hud-tl"></span>
+
+          <span class="hud-corner hud-tr"></span>
+
+          <span class="hud-corner hud-bl"></span>
+
+          <span class="hud-corner hud-br"></span>
+
+
+
+          <!-- HUD Header -->
+          <div class="panel-status">
+
+            <div>
+
+              <span class="system-dot"></span>
+
+              <span>
+                SYSTEM ONLINE
+              </span>
+
+            </div>
+
+
+            <span>
+              SAP // ERP
+            </span>
+
+          </div>
+
+
+
+          <!-- =========================
+               SAP Energy Core
+          ========================== -->
+
+          <div
+            class="hud-core"
+            aria-hidden="true"
+          >
+
+            <span class="orbit orbit-one"></span>
+
+            <span class="orbit orbit-two"></span>
+
+            <span class="orbit orbit-three"></span>
+
+            <span class="core-glow"></span>
+
+
+            <div class="core-center">
+
+              <span>
+                SAP
+              </span>
+
+              <small>
+                CORE
+              </small>
+
+            </div>
+
+          </div>
+
+
+
+          <!-- Focus Title -->
           <span
             id="home-focus-title"
             class="panel-kicker"
@@ -176,30 +347,66 @@
           </span>
 
 
+
+          <!-- Focus Areas -->
           <div
             id="home-focus-areas"
-            class="skill-cloud"
+            class="skill-cloud hud-skills"
           >
 
-            <span>SAP MM</span>
+            <span>
+              SAP MM
+            </span>
 
-            <span>SAP SD</span>
+            <span>
+              SAP SD
+            </span>
 
-            <span>Procurement</span>
+            <span>
+              Procurement
+            </span>
 
-            <span>Order-to-Cash</span>
+            <span>
+              Order-to-Cash
+            </span>
 
-            <span>Integration</span>
+            <span>
+              Integration
+            </span>
 
-            <span>Support</span>
+            <span>
+              Support
+            </span>
 
-            <span>UAT</span>
+            <span>
+              UAT
+            </span>
 
-            <span>Process Design</span>
+            <span>
+              Process Design
+            </span>
 
-            <span>Performance</span>
+            <span>
+              Performance
+            </span>
 
           </div>
+
+
+
+          <!-- HUD Footer -->
+          <div class="hud-footer">
+
+            <span>
+              BUSINESS SYSTEMS
+            </span>
+
+            <span>
+              READY
+            </span>
+
+          </div>
+
 
         </div>
 
@@ -276,6 +483,7 @@
           </div>
 
 
+
           <!-- Resume Download Buttons -->
           <div class="resume-section-actions">
 
@@ -299,6 +507,7 @@
           </div>
 
         </div>
+
 
 
         <div
@@ -346,6 +555,7 @@
         </div>
 
 
+
         <div
           id="cert-grid"
           class="cert-grid"
@@ -391,6 +601,7 @@
         </div>
 
 
+
         <div
           id="project-list"
           class="project-stack"
@@ -431,6 +642,7 @@
               聯絡我
             </h2>
 
+
             <p class="contact-intro">
               SAP / ERP 專案、職涯機會或合作需求，歡迎透過 LinkedIn 或 Email 與我聯絡。
             </p>
@@ -440,7 +652,9 @@
         </div>
 
 
+
         <div class="contact-grid">
+
 
           <!-- LinkedIn -->
           <a
@@ -453,6 +667,7 @@
             <span class="contact-icon">
               in
             </span>
+
 
             <div>
 
@@ -473,6 +688,7 @@
           </a>
 
 
+
           <!-- Email -->
           <a
             class="contact-card"
@@ -482,6 +698,7 @@
             <span class="contact-icon">
               @
             </span>
+
 
             <div>
 
@@ -500,6 +717,7 @@
             </div>
 
           </a>
+
 
         </div>
 
@@ -551,11 +769,15 @@
     <div class="container">
 
       <span>
+
         ©
+
         <span id="year"></span>
+
         <span id="footer-brand">
           Gibson Hsieh
         </span>
+
       </span>
 
 
@@ -573,14 +795,19 @@
        Scripts
   ========================== -->
 
+  <!-- Supabase -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+  <!-- Markdown -->
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
+  <!-- HTML Sanitizer -->
   <script src="https://cdn.jsdelivr.net/npm/dompurify/dist/purify.min.js"></script>
 
+  <!-- Project Config -->
   <script src="config.js"></script>
 
+  <!-- Main App -->
   <script src="app.js"></script>
 
 
