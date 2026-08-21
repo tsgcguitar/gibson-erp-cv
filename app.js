@@ -411,3 +411,516 @@ Sales Order → Delivery → PGI → Customer Billing → Intercompany Billing
     document.getElementById('article-grid').innerHTML = '<div class="notice">讀取資料失敗，請檢查 config.js 與 Supabase。</div>';
   });
 })();
+
+/* =========================================================
+   CYBER HERO EFFECTS
+   Gibson Hsieh SAP / ERP Portfolio
+========================================================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const hero = document.querySelector(".cyber-hero");
+
+  if (!hero) return;
+
+
+  /* =====================================================
+     1. Mouse Follow Light
+  ===================================================== */
+
+  hero.addEventListener("pointermove", (event) => {
+
+    const rect = hero.getBoundingClientRect();
+
+    if (!rect.width || !rect.height) return;
+
+
+    const x =
+      ((event.clientX - rect.left) / rect.width) * 100;
+
+    const y =
+      ((event.clientY - rect.top) / rect.height) * 100;
+
+
+    hero.style.setProperty(
+      "--mx",
+      `${Math.max(0, Math.min(100, x))}%`
+    );
+
+    hero.style.setProperty(
+      "--my",
+      `${Math.max(0, Math.min(100, y))}%`
+    );
+
+  });
+
+
+  hero.addEventListener("pointerleave", () => {
+
+    hero.style.setProperty(
+      "--mx",
+      "50%"
+    );
+
+    hero.style.setProperty(
+      "--my",
+      "50%"
+    );
+
+  });
+
+
+
+  /* =====================================================
+     2. Reduced Motion
+  ===================================================== */
+
+  const reducedMotion =
+    window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+
+
+  /* =====================================================
+     3. Particle Generator
+  ===================================================== */
+
+  const particleLayer =
+    hero.querySelector(".hero-particles");
+
+
+  if (
+    particleLayer &&
+    !reducedMotion
+  ) {
+
+    particleLayer.innerHTML = "";
+
+
+    const particleCount =
+      window.innerWidth <= 650
+        ? 18
+        : 34;
+
+
+    for (
+      let i = 0;
+      i < particleCount;
+      i++
+    ) {
+
+      const particle =
+        document.createElement("span");
+
+
+      particle.className =
+        "hero-particle";
+
+
+      const size =
+        Math.random() * 3 + 1;
+
+
+      const hue =
+        175 + Math.random() * 155;
+
+
+      particle.style.setProperty(
+        "--x",
+        `${Math.random() * 100}%`
+      );
+
+
+      particle.style.setProperty(
+        "--y",
+        `${Math.random() * 100}%`
+      );
+
+
+      particle.style.setProperty(
+        "--size",
+        `${size}px`
+      );
+
+
+      particle.style.setProperty(
+        "--hue",
+        hue
+      );
+
+
+      particle.style.setProperty(
+        "--duration",
+        `${5 + Math.random() * 8}s`
+      );
+
+
+      particle.style.setProperty(
+        "--delay",
+        `${Math.random() * -10}s`
+      );
+
+
+      particleLayer.appendChild(
+        particle
+      );
+
+    }
+
+  }
+
+
+
+  /* =====================================================
+     4. Digital Decode Title
+  ===================================================== */
+
+  function runTitleDecode() {
+
+    const title =
+      document.getElementById(
+        "home-title"
+      );
+
+
+    if (
+      !title ||
+      reducedMotion
+    ) {
+      return;
+    }
+
+
+    const originalText =
+      title.textContent.trim();
+
+
+    if (!originalText) return;
+
+
+    const characters =
+      "01<>[]{}#*+/|░▒▓◇◆";
+
+
+    const totalFrames =
+      26;
+
+
+    let frame =
+      0;
+
+
+    const timer =
+      window.setInterval(() => {
+
+        const progress =
+          frame / totalFrames;
+
+
+        title.textContent =
+          [...originalText]
+            .map(
+              (
+                character,
+                index
+              ) => {
+
+                if (
+                  character === " " ||
+                  character === "，" ||
+                  character === "。" ||
+                  character === "/" ||
+                  character === "、" ||
+                  character === "·"
+                ) {
+
+                  return character;
+
+                }
+
+
+                const revealPoint =
+                  index /
+                  originalText.length;
+
+
+                if (
+                  revealPoint <
+                  progress
+                ) {
+
+                  return character;
+
+                }
+
+
+                if (
+                  Math.random() >
+                  0.5
+                ) {
+
+                  return characters[
+                    Math.floor(
+                      Math.random() *
+                      characters.length
+                    )
+                  ];
+
+                }
+
+
+                return character;
+
+              }
+            )
+            .join("");
+
+
+        frame++;
+
+
+        if (
+          frame >
+          totalFrames
+        ) {
+
+          window.clearInterval(
+            timer
+          );
+
+
+          title.textContent =
+            originalText;
+
+        }
+
+      }, 42);
+
+  }
+
+
+
+  /* 等原本 Supabase / Home 資料載入後再跑 */
+
+  window.setTimeout(
+    runTitleDecode,
+    700
+  );
+
+
+
+  /* =====================================================
+     5. HUD 3D Mouse Tilt
+  ===================================================== */
+
+  const panel =
+    hero.querySelector(
+      ".hud-panel"
+    );
+
+
+  if (
+    panel &&
+    !reducedMotion &&
+    window.matchMedia(
+      "(pointer:fine)"
+    ).matches
+  ) {
+
+    panel.addEventListener(
+      "pointermove",
+      (event) => {
+
+        const rect =
+          panel.getBoundingClientRect();
+
+
+        const px =
+          (event.clientX -
+            rect.left) /
+            rect.width -
+          0.5;
+
+
+        const py =
+          (event.clientY -
+            rect.top) /
+            rect.height -
+          0.5;
+
+
+        const rotateX =
+          -py * 3.5;
+
+
+        const rotateY =
+          px * 4.5;
+
+
+        panel.style.transform =
+          `
+          perspective(900px)
+          rotateX(${rotateX}deg)
+          rotateY(${rotateY}deg)
+          translateY(-4px)
+          `;
+
+      }
+    );
+
+
+    panel.addEventListener(
+      "pointerleave",
+      () => {
+
+        panel.style.transform =
+          "";
+
+      }
+    );
+
+  }
+
+
+
+  /* =====================================================
+     6. Restore Cyber Arrow On Main Button
+  ===================================================== */
+
+  window.setTimeout(() => {
+
+    const button =
+      document.getElementById(
+        "home-btn-1"
+      );
+
+
+    if (
+      button &&
+      !button.querySelector(
+        ".button-arrow"
+      )
+    ) {
+
+      const label =
+        button.textContent.trim();
+
+
+      button.innerHTML =
+        `
+        <span>${label}</span>
+        <span class="button-arrow">↗</span>
+        `;
+
+    }
+
+  }, 1000);
+
+
+
+  /* =====================================================
+     7. Skill Chips Stagger Animation
+  ===================================================== */
+
+  window.setTimeout(() => {
+
+    const chips =
+      document.querySelectorAll(
+        ".hud-skills span"
+      );
+
+
+    chips.forEach(
+      (
+        chip,
+        index
+      ) => {
+
+        chip.style.opacity =
+          "0";
+
+
+        chip.style.transform =
+          "translateY(12px)";
+
+
+        chip.style.transition =
+          `
+          opacity .45s ease,
+          transform .45s ease,
+          border-color .25s ease,
+          box-shadow .25s ease
+          `;
+
+
+        window.setTimeout(
+          () => {
+
+            chip.style.opacity =
+              "1";
+
+
+            chip.style.transform =
+              "translateY(0)";
+
+          },
+          600 +
+          index * 70
+        );
+
+      }
+    );
+
+  }, 200);
+
+
+
+  /* =====================================================
+     8. HUD Boot Effect
+  ===================================================== */
+
+  const core =
+    hero.querySelector(
+      ".hud-core"
+    );
+
+
+  if (
+    core &&
+    !reducedMotion
+  ) {
+
+    core.style.opacity =
+      "0";
+
+
+    core.style.transform =
+      "scale(.72)";
+
+
+    core.style.transition =
+      `
+      opacity .8s ease,
+      transform .9s
+      cubic-bezier(.2,.8,.2,1)
+      `;
+
+
+    window.setTimeout(
+      () => {
+
+        core.style.opacity =
+          "1";
+
+
+        core.style.transform =
+          "scale(1)";
+
+      },
+      450
+    );
+
+  }
+
+});
