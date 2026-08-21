@@ -1744,3 +1744,141 @@ Sales Order → Delivery → PGI → Customer Billing → Intercompany Billing
       initCyberHero();
     });
 })();
+/* ========================================
+   Article Search
+======================================== */
+
+const articleSearch = document.getElementById("articleSearch");
+const clearSearch = document.getElementById("clearSearch");
+const searchResultText = document.getElementById("searchResultText");
+
+
+function normalizeText(text) {
+  return text
+    .toLowerCase()
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+
+function searchArticles() {
+
+  if (!articleSearch) return;
+
+  const keyword = normalizeText(articleSearch.value);
+
+  const articleCards = document.querySelectorAll(".article-card");
+
+  let visibleCount = 0;
+
+
+  articleCards.forEach(card => {
+
+    /*
+      直接讀整張卡片的文字
+
+      因此會自動搜尋：
+      - 分類
+      - 標題
+      - 摘要
+      - 其他卡片上的文字
+
+      不需要另外維護 keyword
+    */
+
+    const cardText = normalizeText(card.innerText);
+
+
+    const matched =
+      keyword === "" ||
+      cardText.includes(keyword);
+
+
+    if (matched) {
+
+      card.classList.remove("search-hidden");
+
+      visibleCount++;
+
+    } else {
+
+      card.classList.add("search-hidden");
+
+    }
+
+  });
+
+
+  /* 顯示清除按鈕 */
+
+  if (keyword) {
+
+    clearSearch?.classList.add("show");
+
+  } else {
+
+    clearSearch?.classList.remove("show");
+
+  }
+
+
+  /* 顯示搜尋結果 */
+
+  if (!searchResultText) return;
+
+
+  if (!keyword) {
+
+    searchResultText.textContent = "";
+
+    return;
+
+  }
+
+
+  if (visibleCount === 0) {
+
+    searchResultText.textContent =
+      `找不到與「${articleSearch.value.trim()}」相關的文章`;
+
+  } else {
+
+    searchResultText.textContent =
+      `找到 ${visibleCount} 篇相關文章`;
+
+  }
+
+}
+
+
+/* 即時搜尋 */
+
+articleSearch?.addEventListener("input", searchArticles);
+
+
+/* 清除 */
+
+clearSearch?.addEventListener("click", () => {
+
+  articleSearch.value = "";
+
+  searchArticles();
+
+  articleSearch.focus();
+
+});
+
+
+/* ESC 清除搜尋 */
+
+articleSearch?.addEventListener("keydown", event => {
+
+  if (event.key === "Escape") {
+
+    articleSearch.value = "";
+
+    searchArticles();
+
+  }
+
+});
