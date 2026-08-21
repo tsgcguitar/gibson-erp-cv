@@ -924,3 +924,43 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 });
+
+  /* =====================================================
+     9. Whale Light Burst
+  ===================================================== */
+
+  const whale =
+    hero.querySelector(".light-whale");
+
+  function whaleBurst() {
+    if (!whale || reducedMotion) return;
+
+    whale.animate(
+      [
+        {
+          transform: "scale(1)",
+          filter: "drop-shadow(0 0 18px rgba(105,255,240,0.22))"
+        },
+        {
+          transform: "scale(1.06)",
+          filter: "drop-shadow(0 0 30px rgba(105,255,240,0.42))"
+        },
+        {
+          transform: "scale(1)",
+          filter: "drop-shadow(0 0 18px rgba(105,255,240,0.22))"
+        }
+      ],
+      {
+        duration: 900,
+        easing: "ease-out"
+      }
+    );
+  }
+
+  hero.addEventListener("mouseenter", () => {
+    whaleBurst();
+  });
+
+  hero.addEventListener("click", () => {
+    whaleBurst();
+  });
