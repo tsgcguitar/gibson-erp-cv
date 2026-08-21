@@ -1257,3 +1257,228 @@ label{display:grid;gap:7px;color:#cbd3df;font-size:.9rem}input,textarea{width:10
     animation: none !important;
   }
 }
+/* =========================================================
+   Light Whale / Hologram Whale
+========================================================= */
+
+.light-whale {
+  position: absolute;
+  top: 16%;
+  left: -240px;
+  width: 220px;
+  height: 110px;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.82;
+  filter: drop-shadow(0 0 18px rgba(105, 255, 240, 0.22));
+
+  animation:
+    whaleSwimAcross 24s linear infinite,
+    whaleFloat 4.8s ease-in-out infinite alternate;
+}
+
+.whale-body {
+  position: absolute;
+  left: 28px;
+  top: 24px;
+  width: 132px;
+  height: 56px;
+  border-radius: 60% 50% 52% 56% / 55% 50% 55% 50%;
+  background: linear-gradient(
+    90deg,
+    rgba(105, 255, 240, 0.85) 0%,
+    rgba(95, 219, 255, 0.78) 40%,
+    rgba(149, 124, 255, 0.72) 80%,
+    rgba(255, 120, 219, 0.62) 100%
+  );
+  box-shadow:
+    0 0 16px rgba(105, 255, 240, 0.40),
+    0 0 45px rgba(149, 124, 255, 0.18);
+}
+
+.whale-belly {
+  position: absolute;
+  left: 54px;
+  top: 50px;
+  width: 84px;
+  height: 26px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.22),
+    rgba(255, 255, 255, 0.08)
+  );
+  filter: blur(0.5px);
+}
+
+.whale-fin {
+  position: absolute;
+  background: linear-gradient(
+    135deg,
+    rgba(105, 255, 240, 0.75),
+    rgba(155, 124, 255, 0.55)
+  );
+  box-shadow: 0 0 12px rgba(105, 255, 240, 0.24);
+}
+
+.whale-fin-top {
+  left: 92px;
+  top: 14px;
+  width: 24px;
+  height: 20px;
+  border-radius: 80% 20% 80% 20%;
+  transform: rotate(-18deg);
+}
+
+.whale-fin-side {
+  left: 88px;
+  top: 58px;
+  width: 22px;
+  height: 16px;
+  border-radius: 20% 80% 40% 70%;
+  transform: rotate(18deg);
+}
+
+.whale-tail {
+  position: absolute;
+  left: 8px;
+  top: 34px;
+  width: 38px;
+  height: 30px;
+  transform-origin: right center;
+  animation: whaleTailWave 1.4s ease-in-out infinite;
+}
+
+.whale-tail::before,
+.whale-tail::after {
+  content: "";
+  position: absolute;
+  width: 24px;
+  height: 16px;
+  background: linear-gradient(
+    135deg,
+    rgba(105, 255, 240, 0.72),
+    rgba(155, 124, 255, 0.48)
+  );
+  box-shadow: 0 0 10px rgba(105, 255, 240, 0.18);
+}
+
+.whale-tail::before {
+  left: 0;
+  top: 0;
+  border-radius: 90% 15% 70% 20%;
+  transform: rotate(-28deg);
+}
+
+.whale-tail::after {
+  left: 0;
+  top: 13px;
+  border-radius: 20% 70% 20% 90%;
+  transform: rotate(24deg);
+}
+
+.whale-eye {
+  position: absolute;
+  left: 144px;
+  top: 44px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.95);
+  box-shadow:
+    0 0 6px rgba(255,255,255,0.9),
+    0 0 12px rgba(105,255,240,0.35);
+}
+
+.whale-trail {
+  position: absolute;
+  left: -150px;
+  top: 42px;
+  width: 180px;
+  height: 10px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(105, 255, 240, 0.05) 18%,
+    rgba(105, 255, 240, 0.18) 42%,
+    rgba(155, 124, 255, 0.22) 76%,
+    rgba(255, 120, 219, 0.10) 100%
+  );
+  filter: blur(4px);
+  opacity: 0.9;
+  animation: whaleTrailPulse 2.2s ease-in-out infinite;
+}
+
+@keyframes whaleSwimAcross {
+  0% {
+    transform: translateX(0) translateY(0) scale(0.82);
+    opacity: 0;
+  }
+  8% {
+    opacity: 0.78;
+  }
+  32% {
+    transform: translateX(42vw) translateY(-10px) scale(0.94);
+  }
+  58% {
+    transform: translateX(75vw) translateY(12px) scale(1.02);
+  }
+  82% {
+    transform: translateX(97vw) translateY(-8px) scale(0.96);
+    opacity: 0.72;
+  }
+  100% {
+    transform: translateX(118vw) translateY(0) scale(0.9);
+    opacity: 0;
+  }
+}
+
+@keyframes whaleFloat {
+  0% {
+    margin-top: 0;
+  }
+  100% {
+    margin-top: 14px;
+  }
+}
+
+@keyframes whaleTailWave {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-10deg);
+  }
+}
+
+@keyframes whaleTrailPulse {
+  0%, 100% {
+    opacity: 0.55;
+    transform: scaleX(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scaleX(1.06);
+  }
+}
+
+
+/* 滑鼠移進 hero 時：鯨魚更亮、更快 */
+.cyber-hero:hover .light-whale {
+  opacity: 0.96;
+  filter:
+    drop-shadow(0 0 24px rgba(105, 255, 240, 0.30))
+    drop-shadow(0 0 42px rgba(155, 124, 255, 0.18));
+  animation-duration: 18s, 3.8s;
+}
+
+.cyber-hero:hover .whale-body {
+  box-shadow:
+    0 0 20px rgba(105, 255, 240, 0.46),
+    0 0 56px rgba(149, 124, 255, 0.22);
+}
+
+.cyber-hero:hover .whale-trail {
+  opacity: 1;
+}
