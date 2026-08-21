@@ -1762,3 +1762,152 @@ label{display:grid;gap:7px;color:#cbd3df;font-size:.9rem}input,textarea{width:10
   }
 
 }
+
+/* ========================================
+   Article Search
+======================================== */
+
+.article-heading-row {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.article-heading-row h2 {
+  margin: 0;
+}
+
+.article-search {
+  position: relative;
+  width: 320px;
+  max-width: 100%;
+}
+
+.article-search input {
+  width: 100%;
+  height: 52px;
+
+  padding: 0 48px 0 48px;
+
+  border-radius: 14px;
+
+  border: 1px solid rgba(80, 235, 220, 0.3);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(20, 25, 32, 0.95),
+      rgba(10, 13, 18, 0.95)
+    );
+
+  color: #ffffff;
+
+  font-size: 16px;
+
+  outline: none;
+
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
+}
+
+.article-search input::placeholder {
+  color: rgba(190, 205, 220, 0.55);
+}
+
+.article-search input:focus {
+  border-color: #55e8dc;
+
+  box-shadow:
+    0 0 0 3px rgba(85, 232, 220, 0.08),
+    0 0 24px rgba(85, 232, 220, 0.12);
+
+  transform: translateY(-1px);
+}
+
+.search-icon {
+  position: absolute;
+
+  left: 17px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  color: #55e8dc;
+
+  font-size: 24px;
+
+  pointer-events: none;
+}
+
+.clear-search {
+  position: absolute;
+
+  right: 12px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  width: 30px;
+  height: 30px;
+
+  border: 0;
+  border-radius: 50%;
+
+  background: transparent;
+
+  color: rgba(255, 255, 255, 0.5);
+
+  font-size: 22px;
+
+  cursor: pointer;
+
+  opacity: 0;
+  pointer-events: none;
+
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.clear-search.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.clear-search:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.search-result-text {
+  margin-top: 14px;
+
+  min-height: 22px;
+
+  color: #8fa6bd;
+
+  font-size: 14px;
+}
+
+.article-card.search-hidden {
+  display: none;
+}
+
+
+/* 手機 */
+@media (max-width: 768px) {
+
+  .article-heading-row {
+    align-items: flex-start;
+    gap: 22px;
+  }
+
+  .article-search {
+    width: 100%;
+  }
+
+}
