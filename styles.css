@@ -475,3 +475,785 @@ label{display:grid;gap:7px;color:#cbd3df;font-size:.9rem}input,textarea{width:10
   }
 
 }
+
+
+/* =========================================================
+   GIBSON ERP PORTFOLIO — CYBER HERO / HUD MID-UPGRADE
+   Append-only overrides: keeps all existing sections/admin styles.
+========================================================= */
+
+:root {
+  --border: var(--line);
+  --cyber-cyan: #69fff0;
+  --cyber-blue: #6ea8ff;
+  --cyber-violet: #9b7cff;
+  --cyber-pink: #ff78db;
+}
+
+/* ---------------------------------------------------------
+   Hero base
+--------------------------------------------------------- */
+.cyber-hero {
+  --mx: 50%;
+  --my: 50%;
+  position: relative;
+  min-height: 720px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  isolation: isolate;
+  padding: 0;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(0,255,234,.12), transparent 28%),
+    radial-gradient(circle at 84% 18%, rgba(110,82,255,.15), transparent 34%),
+    radial-gradient(circle at 68% 86%, rgba(255,55,205,.09), transparent 30%),
+    linear-gradient(135deg, #070a10 0%, #090d17 48%, #070910 100%);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+
+.cyber-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(circle 430px at var(--mx) var(--my),
+      rgba(91,236,255,.14), transparent 62%);
+}
+
+.cyber-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: .16;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      rgba(255,255,255,.025) 0,
+      rgba(255,255,255,.025) 1px,
+      transparent 1px,
+      transparent 4px
+    );
+  mix-blend-mode: screen;
+}
+
+/* ---------------------------------------------------------
+   FX layer / moving grid / aurora / scan
+--------------------------------------------------------- */
+.hero-fx,
+.hero-particles {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.hero-fx { z-index: 0; }
+
+.hero-grid-lines {
+  position: absolute;
+  inset: -120px;
+  opacity: .28;
+  background-image:
+    linear-gradient(rgba(96,228,255,.14) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(122,106,255,.12) 1px, transparent 1px);
+  background-size: 48px 48px;
+  -webkit-mask-image: radial-gradient(circle at center, #000, transparent 78%);
+  mask-image: radial-gradient(circle at center, #000, transparent 78%);
+  animation: heroGridMove 18s linear infinite;
+  transform-origin: center bottom;
+}
+
+@keyframes heroGridMove {
+  from {
+    transform: perspective(850px) rotateX(58deg) scale(1.25) translateY(-115px);
+  }
+  to {
+    transform: perspective(850px) rotateX(58deg) scale(1.25) translateY(-67px);
+  }
+}
+
+.hero-aurora {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(82px);
+  opacity: .58;
+  animation: auroraMove 10s ease-in-out infinite alternate;
+}
+
+.hero-aurora-a {
+  width: 430px;
+  height: 430px;
+  left: -180px;
+  top: 80px;
+  background: rgba(0,255,229,.28);
+}
+
+.hero-aurora-b {
+  width: 560px;
+  height: 560px;
+  right: -190px;
+  top: -180px;
+  background: rgba(105,75,255,.28);
+  animation-delay: -3s;
+}
+
+.hero-aurora-c {
+  width: 430px;
+  height: 430px;
+  right: 18%;
+  bottom: -300px;
+  background: rgba(255,61,204,.18);
+  animation-delay: -6s;
+}
+
+@keyframes auroraMove {
+  0% { transform: translate3d(-20px,-15px,0) scale(.95); }
+  100% { transform: translate3d(45px,40px,0) scale(1.12); }
+}
+
+.hero-scanline {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 180px;
+  top: -220px;
+  opacity: .28;
+  background:
+    linear-gradient(
+      to bottom,
+      transparent,
+      rgba(80,247,255,.05),
+      rgba(80,247,255,.18),
+      transparent
+    );
+  animation: scanMove 7s linear infinite;
+}
+
+@keyframes scanMove {
+  to { transform: translateY(1050px); }
+}
+
+/* ---------------------------------------------------------
+   Hero layout
+--------------------------------------------------------- */
+.cyber-hero .hero-content {
+  position: relative;
+  z-index: 3;
+}
+
+.cyber-hero .hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0,1.2fr) minmax(360px,.8fr);
+  gap: clamp(48px,6vw,92px);
+  align-items: center;
+  width: 100%;
+  padding-top: 88px;
+  padding-bottom: 88px;
+}
+
+.hero-copy-wrap {
+  position: relative;
+  min-width: 0;
+  animation: heroLeftIn .9s cubic-bezier(.2,.8,.2,1) both;
+}
+
+@keyframes heroLeftIn {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------------------------------------------------------
+   Status / eyebrow / title
+--------------------------------------------------------- */
+.system-pill {
+  width: max-content;
+  max-width: 100%;
+  margin-bottom: 26px;
+  padding: 9px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid rgba(91,235,255,.28);
+  border-radius: 999px;
+  color: #a6f7ff;
+  background: rgba(10,18,29,.62);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  box-shadow:
+    inset 0 0 20px rgba(42,220,255,.04),
+    0 0 30px rgba(43,216,255,.05);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .15em;
+}
+
+.system-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: #5affd7;
+  box-shadow: 0 0 6px #5affd7, 0 0 16px #5affd7;
+  animation: systemPulse 1.7s ease-in-out infinite;
+}
+
+@keyframes systemPulse {
+  50% {
+    opacity: .4;
+    box-shadow: 0 0 4px #5affd7;
+  }
+}
+
+.system-code { color: #a69aff; }
+
+.cyber-hero .neon-eyebrow {
+  margin-bottom: 18px;
+  color: #6ef5e3;
+  font-weight: 850;
+  letter-spacing: .18em;
+  text-shadow: 0 0 24px rgba(67,255,230,.35);
+}
+
+.cyber-hero .hero-title,
+.cyber-hero h1 {
+  max-width: 900px;
+  margin: 0;
+  font-size: clamp(3.25rem,5.2vw,5.7rem);
+  line-height: 1.01;
+  letter-spacing: -.058em;
+  font-weight: 900;
+  color: transparent;
+  background:
+    linear-gradient(
+      110deg,
+      #fff 0%,
+      #fff 37%,
+      #a7fbff 60%,
+      #cab8ff 80%,
+      #ffb5ed 100%
+    );
+  -webkit-background-clip: text;
+  background-clip: text;
+  text-shadow: 0 10px 70px rgba(80,212,255,.09);
+  filter: drop-shadow(0 0 26px rgba(105,255,240,.05));
+}
+
+.cyber-hero .hero-copy {
+  max-width: 790px;
+  margin: 30px 0 0;
+  color: #c9d2e3;
+  font-size: clamp(1.05rem,1.35vw,1.25rem);
+  line-height: 1.9;
+}
+
+/* ---------------------------------------------------------
+   Buttons
+--------------------------------------------------------- */
+.cyber-hero .hero-actions {
+  margin-top: 36px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 13px;
+}
+
+.cyber-hero .button {
+  position: relative;
+  overflow: hidden;
+  min-height: 50px;
+  transition:
+    transform .25s ease,
+    border-color .25s ease,
+    box-shadow .25s ease,
+    background .25s ease;
+}
+
+.cyber-hero .button::before {
+  content: "";
+  position: absolute;
+  width: 55px;
+  height: 210%;
+  top: -55%;
+  left: -100px;
+  transform: rotate(20deg);
+  background: rgba(255,255,255,.26);
+  filter: blur(8px);
+  transition: left .55s ease;
+}
+
+.cyber-hero .button:hover::before {
+  left: calc(100% + 55px);
+}
+
+.cyber-hero .button:hover {
+  transform: translateY(-4px);
+}
+
+.cyber-hero .button.primary {
+  color: #04100f;
+  border: 1px solid rgba(107,255,228,.8);
+  background: linear-gradient(135deg,#61ead8,#65dfff);
+  box-shadow:
+    0 12px 40px rgba(50,232,217,.20),
+    0 0 0 rgba(67,255,230,0);
+}
+
+.cyber-hero .button.primary:hover {
+  background: linear-gradient(135deg,#77f5e4,#79e8ff);
+  box-shadow:
+    0 18px 55px rgba(50,232,217,.30),
+    0 0 30px rgba(67,255,230,.20);
+}
+
+.cyber-hero .button.secondary {
+  border: 1px solid rgba(151,166,220,.22);
+  background: rgba(13,19,31,.70);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+.cyber-hero .button.secondary:hover {
+  border-color: rgba(118,231,255,.52);
+  background: rgba(23,33,52,.88);
+  box-shadow: 0 15px 40px rgba(52,142,255,.12);
+}
+
+.button-arrow { margin-left: 8px; }
+
+/* ---------------------------------------------------------
+   Tech line
+--------------------------------------------------------- */
+.hero-tech-line {
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  color: rgba(163,184,210,.64);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .16em;
+}
+
+.hero-tech-line i {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #62e8ff;
+  box-shadow: 0 0 8px #62e8ff;
+}
+
+/* =========================================================
+   HUD panel
+========================================================= */
+.cyber-hero .hud-panel {
+  position: relative;
+  overflow: hidden;
+  padding: 28px;
+  border: 1px solid rgba(112,159,255,.30);
+  border-radius: 32px;
+  background:
+    linear-gradient(145deg,rgba(19,25,42,.80),rgba(8,12,22,.88));
+  -webkit-backdrop-filter: blur(22px);
+  backdrop-filter: blur(22px);
+  box-shadow:
+    0 35px 100px rgba(0,0,0,.46),
+    inset 0 0 60px rgba(71,232,255,.045),
+    0 0 65px rgba(93,83,255,.09);
+  animation: hudFloat 6s ease-in-out infinite;
+}
+
+.cyber-hero .hud-panel::before {
+  content: "";
+  position: absolute;
+  width: 230px;
+  height: 230px;
+  right: -80px;
+  top: -95px;
+  border-radius: 50%;
+  background: rgba(105,74,255,.19);
+  filter: blur(52px);
+}
+
+.cyber-hero .hud-panel::after {
+  content: "";
+  position: absolute;
+  width: 230px;
+  height: 230px;
+  left: -120px;
+  bottom: -120px;
+  border-radius: 50%;
+  background: rgba(38,246,228,.13);
+  filter: blur(52px);
+}
+
+@keyframes hudFloat {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.hud-corner {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  z-index: 4;
+}
+
+.hud-tl {
+  top: 16px;
+  left: 16px;
+  border-top: 2px solid #58f4ee;
+  border-left: 2px solid #58f4ee;
+}
+
+.hud-tr {
+  top: 16px;
+  right: 16px;
+  border-top: 2px solid #9e8cff;
+  border-right: 2px solid #9e8cff;
+}
+
+.hud-bl {
+  bottom: 16px;
+  left: 16px;
+  border-bottom: 2px solid #9e8cff;
+  border-left: 2px solid #9e8cff;
+}
+
+.hud-br {
+  bottom: 16px;
+  right: 16px;
+  border-bottom: 2px solid #58f4ee;
+  border-right: 2px solid #58f4ee;
+}
+
+.panel-status {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  color: rgba(181,198,224,.68);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .15em;
+}
+
+.panel-status > div {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+/* ---------------------------------------------------------
+   Energy core
+--------------------------------------------------------- */
+.hud-core {
+  position: relative;
+  z-index: 3;
+  width: 190px;
+  height: 190px;
+  margin: 24px auto 32px;
+  display: grid;
+  place-items: center;
+}
+
+.orbit {
+  position: absolute;
+  border-radius: 50%;
+}
+
+.orbit-one {
+  inset: 0;
+  border: 1px solid rgba(105,239,255,.28);
+  border-top-color: #62f8ef;
+  box-shadow: inset 0 0 20px rgba(98,248,239,.03);
+  animation: orbitSpin 8s linear infinite;
+}
+
+.orbit-two {
+  inset: 18px;
+  border: 1px dashed rgba(168,137,255,.38);
+  border-right-color: #aa8dff;
+  animation: orbitSpinReverse 5s linear infinite;
+}
+
+.orbit-three {
+  inset: 39px;
+  border: 1px solid rgba(255,112,225,.27);
+  border-left-color: #ff80df;
+  animation: orbitSpin 3.6s linear infinite;
+}
+
+@keyframes orbitSpin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes orbitSpinReverse {
+  to { transform: rotate(-360deg); }
+}
+
+.core-glow {
+  position: absolute;
+  width: 102px;
+  height: 102px;
+  border-radius: 50%;
+  background:
+    radial-gradient(
+      circle,
+      rgba(91,248,255,.48),
+      rgba(99,91,255,.15) 46%,
+      transparent 72%
+    );
+  filter: blur(5px);
+  animation: corePulse 2.3s ease-in-out infinite;
+}
+
+@keyframes corePulse {
+  50% {
+    transform: scale(1.2);
+    opacity: .65;
+  }
+}
+
+.core-center {
+  position: relative;
+  width: 84px;
+  height: 84px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid rgba(110,255,244,.55);
+  color: #fff;
+  background:
+    radial-gradient(
+      circle at 40% 30%,
+      rgba(85,234,255,.40),
+      rgba(53,60,130,.27),
+      rgba(10,14,25,.94)
+    );
+  box-shadow:
+    inset 0 0 28px rgba(82,230,255,.18),
+    0 0 25px rgba(66,236,255,.14),
+    0 0 60px rgba(118,79,255,.13);
+}
+
+.core-center::after {
+  content: "";
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.05);
+  box-shadow: 0 0 35px rgba(105,255,240,.10);
+}
+
+.core-center span {
+  font-size: 18px;
+  font-weight: 850;
+  letter-spacing: .08em;
+}
+
+.core-center small {
+  margin-top: 2px;
+  color: #72f2eb;
+  font-size: 7px;
+  letter-spacing: .3em;
+}
+
+/* ---------------------------------------------------------
+   HUD skills / footer
+--------------------------------------------------------- */
+.cyber-hero .panel-kicker {
+  position: relative;
+  z-index: 3;
+  color: #9db7e6;
+}
+
+.cyber-hero .hud-skills {
+  position: relative;
+  z-index: 3;
+  margin-top: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.cyber-hero .hud-skills span {
+  position: relative;
+  cursor: default;
+  overflow: hidden;
+  padding: 9px 14px;
+  border: 1px solid rgba(131,165,228,.24);
+  border-radius: 999px;
+  color: #edf5ff;
+  background: rgba(8,13,23,.64);
+  box-shadow: inset 0 0 20px rgba(75,225,255,.02);
+  transition:
+    transform .25s ease,
+    border-color .25s ease,
+    box-shadow .25s ease,
+    color .25s ease;
+}
+
+.cyber-hero .hud-skills span:hover {
+  transform: translateY(-4px) scale(1.03);
+  color: #fff;
+  border-color: rgba(92,242,255,.58);
+  box-shadow:
+    0 0 22px rgba(72,222,255,.16),
+    inset 0 0 24px rgba(104,78,255,.11);
+}
+
+.hud-footer {
+  position: relative;
+  z-index: 3;
+  margin-top: 25px;
+  padding-top: 15px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  border-top: 1px solid rgba(255,255,255,.06);
+  color: rgba(155,175,203,.52);
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: .18em;
+}
+
+/* ---------------------------------------------------------
+   JS generated particles
+--------------------------------------------------------- */
+.hero-particle {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  color: hsl(var(--hue) 100% 76%);
+  background: currentColor;
+  box-shadow: 0 0 12px currentColor;
+  opacity: 0;
+  animation:
+    particleFloat
+    var(--duration)
+    ease-in-out
+    var(--delay)
+    infinite;
+}
+
+@keyframes particleFloat {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(.4);
+  }
+  25% { opacity: .68; }
+  75% { opacity: .35; }
+  100% {
+    opacity: 0;
+    transform: translateY(-90px) translateX(25px) scale(1.1);
+  }
+}
+
+/* ---------------------------------------------------------
+   Give lower sections a subtle unified tech feel
+--------------------------------------------------------- */
+.card,
+.project-card,
+.cert-card,
+.contact-card {
+  box-shadow: 0 14px 45px rgba(0,0,0,.12);
+}
+
+.card:hover,
+.project-card:hover,
+.cert-card:hover,
+.contact-card:hover {
+  border-color: rgba(100,209,193,.50);
+}
+
+.section .eyebrow {
+  text-shadow: 0 0 20px rgba(100,209,193,.12);
+}
+
+/* ---------------------------------------------------------
+   Responsive
+--------------------------------------------------------- */
+@media (max-width: 980px) {
+  .cyber-hero {
+    min-height: auto;
+  }
+
+  .cyber-hero .hero-grid {
+    grid-template-columns: 1fr;
+    padding-top: 70px;
+    padding-bottom: 80px;
+  }
+
+  .cyber-hero .hero-title,
+  .cyber-hero h1 {
+    font-size: clamp(3rem,10vw,5rem);
+  }
+
+  .cyber-hero .hud-panel {
+    max-width: 650px;
+  }
+}
+
+@media (max-width: 650px) {
+  .cyber-hero .hero-grid {
+    padding-top: 48px;
+    padding-bottom: 64px;
+    gap: 42px;
+  }
+
+  .cyber-hero .hero-title,
+  .cyber-hero h1 {
+    font-size: clamp(2.55rem,12.6vw,3.9rem);
+    line-height: 1.04;
+  }
+
+  .system-code {
+    display: none;
+  }
+
+  .hud-core {
+    width: 150px;
+    height: 150px;
+  }
+
+  .hero-tech-line {
+    display: none;
+  }
+
+  .cyber-hero .hud-panel {
+    padding: 24px 20px;
+    border-radius: 26px;
+  }
+
+  .panel-status {
+    font-size: 8px;
+  }
+}
+
+/* ---------------------------------------------------------
+   Accessibility
+--------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .hero-grid-lines,
+  .hero-aurora,
+  .hero-scanline,
+  .hud-panel,
+  .orbit,
+  .core-glow,
+  .hero-particle,
+  .system-dot,
+  .hero-copy-wrap {
+    animation: none !important;
+  }
+}
