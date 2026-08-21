@@ -1121,6 +1121,30 @@
 
   <script src="app.js"></script>
 
+  <!-- 自動替 Supabase 動態載入的文章卡片加上 article-card -->
+  <script>
+    (() => {
+      const articleGrid = document.getElementById("article-grid");
+
+      if (!articleGrid) return;
+
+      const markArticleCards = () => {
+        Array.from(articleGrid.children).forEach((item) => {
+          if (!item.classList.contains("loading")) {
+            item.classList.add("article-card");
+          }
+        });
+      };
+
+      // 先處理目前已存在的卡片
+      markArticleCards();
+
+      // Supabase 後續把文章載入進來時，自動補上 article-card
+      const observer = new MutationObserver(markArticleCards);
+      observer.observe(articleGrid, { childList: true });
+    })();
+  </script>
+
 
 </body>
 
